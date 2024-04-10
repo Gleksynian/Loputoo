@@ -2,37 +2,122 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #002738;
+    height: 100px;
+    color: #ffff;
+    font-size: 36px;
+    align-items: center;
+    padding: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    font-size: 26px;
+    font-weight: bold;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header ul + ul {
+    margin-left: auto;
 }
 
-.App-link {
-  color: #61dafb;
+header ul li {
+    margin-left: 70px;
+}
+.login-register li {
+    border: 2px solid #ffff;
+    border-radius: 60px;
+    padding: 14px 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.range-input div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.range-input div input{
+    flex-grow: 1;
+    max-width: 45%;
+}
+.main-div {
+    background-color: #1C1C1C;
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0px;
+    min-height: 100vh;
+    align-items: flex-start;
+}
+.main-div>*:nth-child(2){
+    flex-grow: 2;
+}
+.search-aside {
+    color: #ffff;
+    border: 2px solid #ffff;
+    padding: 30px;
+    width: 15%;
+}
+
+.search-aside form >*{
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    margin: 10px 0px;
+}
+
+.search-aside form select {
+    width: 100%;
+    text-align: center;
+}
+
+.search-aside form input {
+    width: 170px;
+    border-radius: 0;
+}
+
+.search-aside form select,.search-aside form input{
+    font-size: 24px;
+    color: black;
+}
+
+.search-aside form button {
+    width: 29.79683972911964% !important;
+    margin: 0 auto;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: #002738;
+    border: 2px solid #ffff;
+    border-radius: 10px;
+    height: 59px;
+    transition-duration: 0.5s;
+}
+
+.search-aside form button:hover {
+    scale: 1.1;
+}
+
+.sosi {
+    margin-top: 35px;
+}
+.main-div {
+    flex-grow: 1;
+    width: 100%;
+}
+.top-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #0000;
+    border: 2px solid #ffff;
+    color: #ffff;
 }
