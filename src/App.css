@@ -8,7 +8,7 @@ header {
     flex-direction: row;
     background-color: #002738;
     height: 100px;
-    color: #ffff;
+    color: #fff;
     font-size: 36px;
     align-items: center;
     padding: 50px;
@@ -33,9 +33,13 @@ header ul li {
     margin-left: 70px;
 }
 .login-register li {
-    border: 2px solid #ffff;
+    border: 2px solid #fff;
     border-radius: 60px;
     padding: 14px 15px;
+}
+
+.range-input {
+    margin-top: 3px !important;
 }
 
 .range-input div{
@@ -56,14 +60,17 @@ header ul li {
     padding: 50px 0px;
     min-height: 100vh;
     align-items: flex-start;
+    gap: 50px;
+    padding: 50px;
 }
 .main-div>*:nth-child(2){
     flex-grow: 2;
 }
 .search-aside {
-    color: #ffff;
-    border: 2px solid #ffff;
+    color: #fff;
+    border: 2px solid #fff;
     padding: 30px;
+    padding-top: 0;
     width: 15%;
 }
 
@@ -71,12 +78,11 @@ header ul li {
     display: block;
     width: 100%;
     border-radius: 0;
-    margin: 10px 0px;
 }
 
 .search-aside form select {
     width: 100%;
-    text-align: center;
+    margin-top: 20px;
 }
 
 .search-aside form input {
@@ -86,19 +92,17 @@ header ul li {
 
 .search-aside form select,.search-aside form input{
     font-size: 24px;
-    color: black;
+    color: #000;
 }
 
 .search-aside form button {
-    width: 29.79683972911964% !important;
-    margin: 0 auto;
-    color: #ffff;
+    margin-top: 15px;
+    color: #fff;
     font-weight: bold;
     font-size: 24px;
     background-color: #002738;
-    border: 2px solid #ffff;
+    border: 2px solid #fff;
     border-radius: 10px;
-    height: 59px;
     transition-duration: 0.5s;
 }
 
@@ -106,7 +110,7 @@ header ul li {
     scale: 1.1;
 }
 
-.sosi {
+.fuel-select {
     margin-top: 35px;
 }
 .main-div {
@@ -117,7 +121,31 @@ header ul li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #0000;
-    border: 2px solid #ffff;
-    color: #ffff;
+    background-color: #000;
+    border: 2px solid #fff;
+    color: #fff;
+    align-items: center;
+    padding-inline: 50px;
+}
+
+.top-panel p {
+    margin: 0;
+    font-size: 24px;
+    margin-block: 8px;
+}
+
+.sort-select {
+    background-color: #000;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+}
+
+.sort-select option {
+    color: #000;
+    background-color: #fff;
+}
+
+label {
+    font-size: 24px;
 }
