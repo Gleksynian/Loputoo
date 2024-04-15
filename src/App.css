@@ -141,6 +141,11 @@ header ul li {
     font-size: 24px;
 }
 
+
+.search-aside select option {
+    color: black;
+}
+
 .sort-select option {
     color: #000;
     background-color: #fff;
@@ -148,4 +153,49 @@ header ul li {
 
 label {
     font-size: 24px;
+}
+.cardList {
+    margin-top: 50px;
+}
+.card {
+    background-color: #1C1C1C !important;
+    display: flex !important;
+    flex-direction: row;
+    border: 2px solid #fff;
+    border-radius: 0;
+    padding: 8px;
+}
+.card .newOffer {
+    background-color: #002738;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid #fff;
+    border-radius: none;
+    padding: 12px 35px;
+
+    position: absolute;
+    top: 25px;
+    left: -41px;
+}
+.card img {
+    width: 444px;
+    margin-right: 80px;
+}
+.card .mainInfo {
+    font-size: 32px;
+    color: #fff;
+}
+
+.badges {
+    color: #fff;
+
+}
+
+.badges span {
+    border: 1px solid #fff;
+    border-radius: 60px;
+    padding: 6px 12px;
+    font-size: 20px;
+    margin-right: 40px;
 }
