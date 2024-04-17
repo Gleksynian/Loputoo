@@ -1,0 +1,37 @@
+.details {
+    width: 94.79166666666667%;
+    margin: 0 auto;
+}
+
+.details h2 {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 500px;
+    border-bottom: 1px solid #fff;
+}
+
+.details p {
+    color: #fff;
+    font-size: 24px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+}
+
+.details .carInfo {
+    width: 54.94505494505495%;
+}
+
+.priceStyle {
+    font-weight: bold;
+}
+
+.details .additionalInfo{
+border: none;
+}
+
+.details .additionalInfoText {
+    text-align: justify;
+    align-items: center;
+    border: 2px solid #fff;
+    padding: 3px 5px;
+}
