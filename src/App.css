@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 body {
@@ -17,6 +17,12 @@ header {
     padding: 50px;
 }
 
+header h1 a {
+    font-weight: normal;
+    text-decoration: none;
+    color: #fff;
+}
+
 header ul {
     list-style-type: none;
     display: flex;
@@ -28,13 +34,14 @@ header ul {
     padding: 0;
 }
 
-header ul + ul {
+header ul+ul {
     margin-left: auto;
 }
 
 header ul li {
     margin-left: 70px;
 }
+
 .login-register li {
     border: 2px solid #fff;
     border-radius: 60px;
@@ -45,17 +52,19 @@ header ul li {
     margin-top: 3px !important;
 }
 
-.range-input div{
+.range-input div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
-.range-input div input{
+
+.range-input div input {
     flex-grow: 1;
     max-width: 45%;
 }
+
 .main-div {
     display: flex;
     flex-direction: row;
@@ -65,9 +74,11 @@ header ul li {
     gap: 50px;
     padding: 50px;
 }
-.main-div>*:nth-child(2){
+
+.main-div>*:nth-child(2) {
     flex-grow: 2;
 }
+
 .search-aside {
     color: #fff;
     border: 2px solid #fff;
@@ -76,7 +87,7 @@ header ul li {
     width: 15%;
 }
 
-.search-aside form >*{
+.search-aside form>* {
     display: block;
     width: 100%;
     border-radius: 0;
@@ -85,14 +96,17 @@ header ul li {
 .search-aside form select {
     width: 100%;
     margin-top: 20px;
+    border: none;
 }
 
 .search-aside form input {
     width: 170px;
     border-radius: 0;
+    border: none;
 }
 
-.search-aside form select,.search-aside form input{
+.search-aside form select,
+.search-aside form input {
     font-size: 24px;
     color: #000;
 }
@@ -115,10 +129,12 @@ header ul li {
 .fuel-select {
     margin-top: 35px;
 }
+
 .main-div {
     flex-grow: 1;
     width: 100%;
 }
+
 .top-panel {
     display: flex;
     flex-direction: row;
@@ -156,6 +172,7 @@ header ul li {
 label {
     font-size: 24px;
 }
+
 .cardList>a {
     text-decoration: none;
 }
@@ -163,6 +180,7 @@ label {
 .cardList {
     margin-top: 50px;
 }
+
 .card {
     background-color: #1C1C1C !important;
     display: flex !important;
@@ -171,6 +189,7 @@ label {
     border-radius: 0;
     padding: 8px;
 }
+
 .card .newOffer {
     background-color: #002738;
     color: #fff;
@@ -184,10 +203,12 @@ label {
     top: 25px;
     left: -41px;
 }
+
 .card img {
     width: 444px;
     margin-right: 80px;
 }
+
 .card .mainInfo {
     font-size: 32px;
     color: #fff;
@@ -210,42 +231,39 @@ label {
     width: 800px;
     height: 430px;
     justify-self: center;
-    margin-top: 140px;
     position: relative;
+    background-color: #1C1C1C !important;
+    border: 2px solid #fff !important;
+    border-radius: 10px !important;
+    overflow: visible !important;
 }
 
-.loginDivWindow {
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    width: 316px;
-    height: 78px;
-    color: #fff;
-}
-
-.loginDivWindow>h1 {
-    margin: 22px 123px;
-    font-size: 28px;
-}
-
-.registerDivWindow {
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    width: 316px;
-    height: 78px;
-    color: #fff;
-    position: absolute;
-    top: -20px;
-}
-
-.registerDivWindow>h1 {
-    margin: 22px 123px;
-    font-size: 28px;
+.window {
+    overflow: visible;
 }
 
 .loginRegisterWindows {
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transform: translate(0%, -50%);
+}
+
+.loginRegisterWindows>div {
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    width: 316px;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.loginRegisterWindows>div>h1 {
+    font-size: 28px;
+    margin: 0;
+    color: white;
+    padding: 22px 123px;
 }
 
 .login-register>li>button {
@@ -253,4 +271,137 @@ label {
     border: none;
     color: #fff;
     font-weight: bold;
+}
+
+.login-button {
+    display: flex;
+    background-color: #002738;
+    font-size: 24px;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 60px;
+    font-weight: bold;
+    padding: 10px 23px;
+    margin-top: 110px;
+}
+
+.formLogin>form>input {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #1C1C1C;
+    color: #fff;
+}
+
+.formLogin>form>input::placeholder {
+    color: #fff;
+    opacity: 75%;
+    padding-left: 20px;
+}
+
+.formLogin>form>input {
+    width: 700px;
+    height: 46px;
+    font-size: 24px;
+    position: relative;
+}
+
+.input-password {
+    margin-top: 20px;
+}
+
+.button-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.formLogin>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerDivWindow>button {
+    background-color: #000;
+    border: none;
+    color: #fff;
+}
+
+.formRegister>form>input {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #1C1C1C;
+    color: #fff;
+}
+
+.formRegister>form>input::placeholder {
+    color: #fff;
+    opacity: 75%;
+    padding-left: 20px;
+}
+
+.formRegister>form>input {
+    width: 700px;
+    height: 46px;
+    font-size: 24px;
+    position: relative;
+}
+
+.formRegister>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-button {
+    display: flex;
+    background-color: #002738;
+    font-size: 24px;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 60px;
+    font-weight: bold;
+    padding: 10px 23px;
+    margin-top: 30px;
+}
+
+.input-password-again {
+    margin-top: 12px;
+}
+
+.input-mail-register {
+    margin-top: 12px;
+}
+
+.input-password-register {
+    margin-top: 12px;
+}
+
+.input-name-register {
+    margin-top: -25px !important;
+}
+
+.login-register>li>button {
+    position: relative;
+}
+
+.login-register>li>button::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+}
+
+.login-register>li>button::after {
+    width: 0;
+    transition: 0.3s;
+}
+
+.login-register>li>button:hover::after {
+    width: 100%;
 }

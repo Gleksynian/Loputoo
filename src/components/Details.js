@@ -5,10 +5,10 @@ import Header from './Header.js'
 import { useParams } from 'react-router-dom'
 
 function Details() {
-    const {id} = useParams()
+    const { id } = useParams()
     return (
         <div>
-            <Header/>
+            <Header />
             <div className='details'>
                 <h2>Skoda</h2>
                 <div>
