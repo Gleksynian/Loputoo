@@ -19,13 +19,13 @@ function PlaceAnAd() {
                 <div>
                     <form>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option value={0}>Марка</option>
+                            <option hidden value={0}>Марка</option>
                             <option value={1}>BMW</option>
                             <option value={2}>Volkswagen</option>
                             <option value={3}>Audi</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option>Модель</option>
+                            <option hidden>Модель</option>
                             <option>530</option>
                             <option>Golf</option>
                             <option>R8</option>
@@ -55,24 +55,24 @@ function PlaceAnAd() {
                             </div>
                         </div>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }} className='fuel-select'>
-                            <option>Топливо</option>
+                            <option hidden>Топливо</option>
                             <option>Дизель</option>
                             <option>Бензин</option>
                             <option>Электричество</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option>КПП</option>
+                            <option hidden>КПП</option>
                             <option>Автомат</option>
                             <option>Механическая коробка передач</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option>Ведущие колеса</option>
+                            <option hidden>Ведущие колеса</option>
                             <option>Задние ведущие</option>
                             <option>Передние ведущие</option>
                             <option>4x4</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option>Местоположение</option>
+                            <option hidden>Местоположение</option>
                             <option>Кохтла-Ярве</option>
                             <option>Таллинн</option>
                             <option>Тарту</option>
