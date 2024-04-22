@@ -205,3 +205,52 @@ label {
     font-size: 20px;
     margin-right: 40px;
 }
+
+.ReactModal__Content--after-open {
+    width: 800px;
+    height: 430px;
+    justify-self: center;
+    margin-top: 140px;
+    position: relative;
+}
+
+.loginDivWindow {
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    width: 316px;
+    height: 78px;
+    color: #fff;
+}
+
+.loginDivWindow>h1 {
+    margin: 22px 123px;
+    font-size: 28px;
+}
+
+.registerDivWindow {
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    width: 316px;
+    height: 78px;
+    color: #fff;
+    position: absolute;
+    top: -20px;
+}
+
+.registerDivWindow>h1 {
+    margin: 22px 123px;
+    font-size: 28px;
+}
+
+.loginRegisterWindows {
+    display: flex;
+}
+
+.login-register>li>button {
+    background: #002738;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+}
