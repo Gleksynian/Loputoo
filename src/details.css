@@ -1,6 +1,7 @@
 .details {
     width: 94.79166666666667%;
     margin: 0 auto;
+    margin-top: 50px;
 }
 
 .details h2 {
@@ -8,6 +9,7 @@
     color: #fff;
     font-weight: 500px;
     border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
 }
 
 .details p {
@@ -18,7 +20,7 @@
 }
 
 .details .carInfo {
-    width: 54.94505494505495%;
+    width: 55%;
 }
 
 .priceStyle {
@@ -33,5 +35,45 @@ border: none;
     text-align: justify;
     align-items: center;
     border: 2px solid #fff;
-    padding: 3px 5px;
+    padding: 5px 10px;
+}
+
+.carInfo>button {
+    color: #fff;
+    padding: 14px;
+    font-weight: bold;
+    font-size: 26px;
+    border: 2px solid #fff;
+    border-radius: 60px;
+    background: #002738;
+}
+
+.addToFavourites {
+    margin-right: 30px;
+}
+
+.horizontal-divs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider-container {
+    width: 596px !important;
+    height: 400px !important;
+}
+
+.swiperdiv {
+    width: 40%;
+    height: 35vw;
+}
+
+.swiperdiv>.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }

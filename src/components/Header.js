@@ -22,6 +22,7 @@ function Header() {
     const closeRegisterModal = () => {
         setModalIsOpen(false);
     };
+    //Модальное окно логина
     const loginModal = (
         <div className='window'>
             <div className='loginRegisterWindows'>
@@ -41,6 +42,7 @@ function Header() {
             </div>
         </div>
     )
+    //Модальное окно регистрации
     const registerModal = (
         <div className='window'>
             <div className='loginRegisterWindows'>
@@ -66,9 +68,10 @@ function Header() {
         <header>
             <h1><a href='/'>AutoKaup24</a></h1>
             <ul>
-                <li>Создать объявление</li>
+                <li>
+                    <a href='/placeAnAd'>Создать объявление</a>
+                </li>
                 <li>Избранное</li>
-
             </ul>
             <ul className='login-register'>
                 <li>

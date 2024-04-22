@@ -1,5 +1,5 @@
 .App {
-    text-align: center;
+  text-align: center;
 }
 
 body {
@@ -231,6 +231,7 @@ label {
     width: 800px;
     height: 430px;
     justify-self: center;
+    margin-top: 100px;
     position: relative;
     background-color: #1C1C1C !important;
     border: 2px solid #fff !important;
@@ -404,4 +405,51 @@ label {
 
 .login-register>li>button:hover::after {
     width: 100%;
+}
+
+ul>li>a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.search-aside form select,.search-aside form input{
+    font-size: 22px;
+    color: #000;
+}
+
+.search-aside form input {
+    width: 170px;
+    border-radius: 0;
+}
+
+.search-aside form select {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.search-aside form >*{
+    display: block;
+    width: 100%;
+    border-radius: 0;
+}
+
+.main-div>*:nth-child(2){
+    flex-grow: 2;
+}
+
+.range-input div input{
+    flex-grow: 1;
+    max-width: 45%;
+}
+
+.range-input div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+header ul + ul {
+    margin-left: auto;
 }
