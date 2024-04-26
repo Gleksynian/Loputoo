@@ -1,9 +1,63 @@
-form{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-}
-
 label {
     color: #fff;
+}
+
+.image-photo {
+    width: 140px;
+    height: 140px;
+    background-color: white;
+    padding: 21px 27px;
+}
+
+.placeAdDiv {
+    margin-left: 155px;
+    margin-top: 65px;
+    width: 83.85416666666667%;
+    height: 78.7037037037037%;
+}
+
+form>select {
+    display: block;
+    font-size: 22px;
+}
+
+.additionalInfoAd {
+    display: flex;
+    flex-direction: column;
+    width: 46.04166666666667%;
+    height: 10.41666666666667%;
+}
+
+.additionalInfoAd input {
+    width: 46.04166666666667%;
+}
+
+.btn-submit-ad {
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #002738;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px 16px;
+    margin-top: 14px;
+    margin-left: 45%
+}
+
+form>select {
+    margin-top: 20px;
+    width: 20%;
+}
+
+.range-input {
+    width: 10%;
+}
+
+.mainPhotoAd {
+    display: flex;
+    flex-direction: column;
+}
+
+.additionalInputAd {
+    width: 46.04166666666667%;
 }

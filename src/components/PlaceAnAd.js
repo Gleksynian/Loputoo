@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Header from './Header.js'
 import '../placeAnAd.css'
+import photoAdForm from '../assets/photoAdForm.svg'
+
 
 function PlaceAnAd() {
     const [select, setSelect] = useState("#00000050");
@@ -16,7 +18,7 @@ function PlaceAnAd() {
         <>
             <div>
                 <Header />
-                <div>
+                <div className='placeAdDiv'>
                     <form>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
                             <option hidden value={0}>Марка</option>
@@ -77,11 +79,22 @@ function PlaceAnAd() {
                             <option>Таллинн</option>
                             <option>Тарту</option>
                         </select>
+                        <div className='additionalInfoAd'>
+                            <label>Дополнительная информация</label>
+                            <input className='additionalInputAd' type='text'></input>
+                        </div>
+                        <div className='mainPhotoAd'>
+                            <label>Главная фотография</label>
+                            <label>
+                                <img className='image-photo' src={photoAdForm} />
+                                <input type='file' hidden></input>
+                            </label>
+                        </div>
+                        <button className='btn-submit-ad' type='submit'>Подтвердить</button>
                     </form>
                 </div>
             </div>
         </>
     )
 }
-
 export default PlaceAnAd
