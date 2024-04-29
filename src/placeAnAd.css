@@ -21,17 +21,27 @@ form>select {
     font-size: 22px;
 }
 
-.additionalInfoAd {
+.range-input {
+    width: 170px;
+}
+
+.divAd {
     display: flex;
-    flex-direction: column;
-    width: 46.04166666666667%;
-    height: 10.41666666666667%;
+    
 }
 
-.additionalInfoAd input {
-    width: 46.04166666666667%;
+.divAd>div {
+    width: 50%;
 }
-
+.formDivAd>* {
+    display: block;
+    width: 380px;
+}
+.additionalInfoAd textarea {
+    display: block;
+    min-height: 150px;
+    field-sizing: content;
+}
 .btn-submit-ad {
     color: #fff;
     border: 2px solid #fff;
