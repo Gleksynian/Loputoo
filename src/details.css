@@ -65,6 +65,7 @@ border: none;
 .swiperdiv {
     width: 40%;
     height: 35vw;
+    z-index: 0;
 }
 
 .swiperdiv>.swiper {

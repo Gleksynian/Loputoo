@@ -61,3 +61,16 @@ form>select {
 .additionalInputAd {
     width: 46.04166666666667%;
 }
+
+.adPhotoLabel {
+    width: 140px;
+    height: 140px;
+}
+
+.fuel-select {
+    margin-top: 20px;
+}
+
+.powerLabel {
+    width: 177px;
+}
