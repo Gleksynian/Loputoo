@@ -21,8 +21,13 @@ form>select {
     font-size: 22px;
 }
 
-.range-input {
-    width: 170px;
+.ad-input {
+    width: 170px !important;
+}
+
+.ad-input>div>input {
+    font-size: 22px;
+    border: none;
 }
 
 .divAd {
@@ -51,6 +56,7 @@ form>select {
     font-weight: bold;
     padding: 15px 16px;
     margin-top: 14px;
+    margin-bottom: 15px;
     margin-left: 45%
 }
 
@@ -59,8 +65,8 @@ form>select {
     width: 20%;
 }
 
-.range-input {
-    width: 10%;
+.ad-input {
+    width: 170px;
 }
 
 .mainPhotoAd {
@@ -69,7 +75,7 @@ form>select {
 }
 
 .additionalInputAd {
-    width: 46.04166666666667%;
+    width: 630px;
 }
 
 .adPhotoLabel {
@@ -79,8 +85,57 @@ form>select {
 
 .fuel-select {
     margin-top: 20px;
+    border: none;
+    font-size: 22px;
 }
 
 .powerLabel {
     width: 177px;
+}
+
+.mileage-label {
+    width: 141px;
+}
+
+.gear-select {
+    margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    width: 383px;
+}
+
+.transmission-select {
+    margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    width: 383px;
+}
+
+.location-select {
+    margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    width: 383px;
+}
+
+.brand-select {
+    margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    width: 383px;
+}
+
+.model-select {
+    margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    width: 383px;
+}
+
+.adForm {
+    padding: 21px 59px 15px 30px;
+}
+
+.formDivAd select option {
+    color: black;
 }
