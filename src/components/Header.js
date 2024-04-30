@@ -71,7 +71,7 @@ function Header() {
                 <li>
                     <a href='/placeAnAd'>Создать объявление</a>
                 </li>
-                <li>Избранное</li>
+                <li><a href='favourites'>Избранное</a></li>
             </ul>
             <ul className='login-register'>
                 <li>
