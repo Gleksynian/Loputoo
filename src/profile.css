@@ -1,0 +1,131 @@
+.profile-page {
+    display: flex;
+}
+
+.profile-change {
+    margin-left: 155px;
+    margin-top: 65px;
+    width: 19.94791666666667%;
+}
+
+.username {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.old-email {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+.old-phone-num {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+.profile-change-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-change-form>input {
+    border: none;
+    border-radius: none;
+    margin-bottom: 25px;
+    height: 50px;
+}
+
+.profile-change-form>button {
+    color: #fff;
+    width: 53.26370757180157%;
+    padding: 14px;
+    font-weight: bold;
+    font-size: 24px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background: #002738;
+    margin-left: 23.49869451697128%;
+    padding: 15px 20px;
+}
+
+.profile-change-form>input::placeholder {
+    opacity: 0.5;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    padding: 0px 0px 0px 15px;
+}
+
+.my-ads {
+    margin-left: 125px;
+    width: 57.39583333333333%;
+    margin-top: 65px;
+}
+
+.my-ads-header {
+    font-weight: bold;
+    font-size: 26px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.my-ad-card {
+    background-color: #1C1C1C !important;
+    display: flex !important;
+    flex-direction: row;
+    border: 2px solid #fff;
+    border-radius: 0;
+    padding: 8px;
+}
+
+.ad-edit-btn {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background: #002738;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.ad-delete-btn {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background: #002738;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.my-ad-card p {
+    font-size: 32px;
+    color: #fff;
+    margin-left: 65px;
+}
+
+.ad-profile {
+    margin-left: 61.91870031349048%;
+    display: flex;
+    width: 100%;
+}
+
+.ad-profile button {
+    margin-top: 25px;
+    flex-direction: row;
+    width: 100%;
+}
+
+.my-ad-list {
+    width: 100%
+}
