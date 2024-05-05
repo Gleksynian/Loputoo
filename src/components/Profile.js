@@ -27,15 +27,13 @@ function Profile() {
                             <img src={car} alt='car' />
                             <div>
                                 <div className='my-ad-card-info'>
-                                    <p>Skoda Superb</p>
-                                    <p>13500e</p>
-                                    <p>2017</p>
+                                    <p className='ad-name'>Skoda Superb</p>
+                                    <p className='ad-price'>13500e</p>
+                                    <p className='ad-year'>2017</p>
                                 </div>
                                 <div className='my-ad-buttons'>
-                                    <form className='ad-profile'>
-                                        <button className='ad-edit-btn'>Редактировать</button>
-                                        <button className='ad-delete-btn'>Удалить</button>
-                                    </form>
+                                    <button className='ad-edit-btn'>Редактировать</button>
+                                    <button className='ad-delete-btn'>Удалить</button>
                                 </div>
                             </div>
                         </div>
