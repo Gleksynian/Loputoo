@@ -7,8 +7,6 @@ import PlaceAnAd from './components/PlaceAnAd'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Favourites from './components/Favourites'
 import Profile from './components/Profile'
-import AdminPanel from './components/AdminPanel'
-
 
 function App() {
 
@@ -21,7 +19,6 @@ function App() {
                     <Route path="/placeAnAd" element={<PlaceAnAd />} />
                     <Route path="/favourites" element={<Favourites />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/AdminPanel" element={<AdminPanel />} />
                 </Routes>
             </Router>
         </>
