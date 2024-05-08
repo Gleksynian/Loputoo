@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../App.css'
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 function Header() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalLogin, setModalLogin] = useState(false);
-
+    const [cookies, setCookies] = useCookies()
 
     const openLoginModal = () => {
         setModalLogin(true);
@@ -22,6 +24,10 @@ function Header() {
     const closeRegisterModal = () => {
         setModalIsOpen(false);
     };
+    const formHandler = async() => {
+        const response = await axios.post('http://localhost:5000/users/login/')
+        setCookies('token', response.access_token)
+    }
     //Модальное окно логина
     const loginModal = (
         <div className='window'>
@@ -54,12 +60,12 @@ function Header() {
                 </div>
             </div>
             <div className='formRegister'>
-                <form>
+                <form onSubmit={formHandler}>
                     <input className='input-name-register' type='text' placeholder='Имя'></input>
                     <input className='input-mail-register' type='text' placeholder='E-Mail'></input>
                     <input className='input-password-register' type='password' placeholder='Пароль'></input>
                     <input className='input-password-again' type='password' placeholder='Подтвердите пароль'></input>
-                    <button className='register-button'>Зарегистрироваться</button>
+                    <button className='register-button' type='submit'>Зарегистрироваться</button>
                 </form>
             </div>
         </div>
