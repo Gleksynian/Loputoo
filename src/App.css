@@ -73,6 +73,7 @@ header ul li {
     align-items: flex-start;
     gap: 50px;
     padding: 50px;
+    margin-left: 0px !important;
 }
 
 .main-div>*:nth-child(2) {
@@ -84,7 +85,7 @@ header ul li {
     border: 2px solid #fff;
     padding: 30px;
     padding-top: 0;
-    width: 15%;
+    width: 23.07291666666667%;
 }
 
 .search-aside form>* {
@@ -197,7 +198,7 @@ label {
     font-weight: bold;
     border: 2px solid #fff;
     border-radius: none;
-    padding: 12px 35px;
+    padding: 12px 30px;
 
     position: absolute;
     top: 25px;
@@ -216,6 +217,7 @@ label {
 
 .badges {
     color: #fff;
+    margin-top: 35px;
 
 }
 
@@ -229,7 +231,7 @@ label {
 
 .ReactModal__Content--after-open {
     width: 800px;
-    height: 430px;
+    height: 526px;
     justify-self: center;
     margin-top: 100px;
     position: relative;
@@ -364,7 +366,7 @@ label {
     border-radius: 60px;
     font-weight: bold;
     padding: 10px 23px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .input-password-again {

@@ -20,19 +20,25 @@ function Main() {
                 <aside className='search-aside'>
                     <form>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option hidden value={0}>Марка</option>
+                            <option hidden value={0}>Brand</option>
                             <option value={1}>BMW</option>
                             <option value={2}>Volkswagen</option>
                             <option value={3}>Audi</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option hidden>Модель</option>
+                            <option hidden>Model</option>
                             <option>530</option>
                             <option>Golf</option>
                             <option>R8</option>
                         </select>
+                        <select onChange={(e) => { handler(e) }} style={{ color: select }}>
+                            <option hidden>Body type</option>
+                            <option>Touring</option>
+                            <option>Sedan</option>
+                            <option>Hatchback</option>
+                        </select>
                         <div className='range-input'>
-                            <label>Год</label>
+                            <label>Year</label>
                             <div>
                                 <input type='number' min={0}></input>
                                 -
@@ -40,7 +46,7 @@ function Main() {
                             </div>
                         </div>
                         <div className='range-input'>
-                            <label>Цена</label>
+                            <label>Price</label>
                             <div>
                                 <input type='number' min={0}></input>
                                 -
@@ -48,7 +54,7 @@ function Main() {
                             </div>
                         </div>
                         <div className='range-input'>
-                            <label>Мощность (кВ)</label>
+                            <label>Power (kW)</label>
                             <div>
                                 <input type='number' min={0}></input>
                                 -
@@ -56,7 +62,7 @@ function Main() {
                             </div>
                         </div>
                         <div className='range-input'>
-                            <label>Пробег (км)</label>
+                            <label>Mileage (kM)</label>
                             <div>
                                 <input type='number' min={0}></input>
                                 -
@@ -64,81 +70,57 @@ function Main() {
                             </div>
                         </div>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }} className='fuel-select'>
-                            <option hidden>Топливо</option>
-                            <option>Дизель</option>
-                            <option>Бензин</option>
+                            <option hidden>Fuel</option>
+                            <option>Diesel</option>
+                            <option>Petrol</option>
                             <option>Электричество</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option hidden>КПП</option>
-                            <option>Автомат</option>
+                            <option hidden>Transmission</option>
+                            <option>Automatic</option>
                             <option>Механическая коробка передач</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option hidden>Ведущие колеса</option>
-                            <option>Задние ведущие</option>
-                            <option>Передние ведущие</option>
+                            <option hidden>Drivetrain</option>
+                            <option>Rear-wheel drive</option>
+                            <option>Front-wheel drive</option>
                             <option>4x4</option>
                         </select>
                         <select onChange={(e) => { handler(e) }} style={{ color: select }}>
-                            <option hidden>Местоположение</option>
+                            <option hidden>Location</option>
                             <option>Кохтла-Ярве</option>
                             <option>Таллинн</option>
                             <option>Тарту</option>
                         </select>
-                        <button type='submit'>Искать</button>
+                        <button type='submit'>Search</button>
                     </form>
                 </aside>
                 <div>
                     <div className='top-panel'>
                         <p>Найдено:</p>
                         <select className='sort-select'>
-                            <option>Сортировка</option>
-                            <option>Volkswagen</option>
-                            <option>Audi</option>
+                            <option>Sort</option>
                         </select>
                     </div>
                     <div className='cardList'>
-                        <div className='card'>
-                            <span className='newOffer'>
-                                Новое предложение
-                            </span>
-                            <img src={car} alt='car'/>
-                            <div>
-                                <div className='mainInfo'>
-                                    <p>Skoda Superb</p>
-                                    <p>13500e</p>
-                                    <p>2017</p>
-                                </div>
-                                <div className='badges'>
-                                    <span>188500km</span>
-                                    <span>Diesel</span>
-                                    <span>Automat</span>
-                                    <span>Avant</span>
-                                    <span>Foreground</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='cardList'>
-                        <a href='/cardetails/2'>
+                        <a href='/cardetails/1'>
                             <div className='card'>
                                 <span className='newOffer'>
-                                    Новое предложение
+                                    New offer
                                 </span>
                                 <img src={car} alt='car' />
                                 <div>
                                     <div className='mainInfo'>
                                         <p>Skoda Superb</p>
-                                        <p>13500e</p>
+                                        <p>13500 €</p>
                                         <p>2017</p>
                                     </div>
                                     <div className='badges'>
                                         <span>188500km</span>
                                         <span>Diesel</span>
-                                        <span>Automat</span>
-                                        <span>Avant</span>
-                                        <span>Foreground</span>
+                                        <span>Automatic</span>
+                                        <span>Touring</span>
+                                        <span>Front-wheel drive</span>
                                     </div>
                                 </div>
                             </div>
