@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import '../App.css'
 import { useCookies } from 'react-cookie';
@@ -8,6 +8,7 @@ function Header() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalLogin, setModalLogin] = useState(false);
     const [cookies, setCookies] = useCookies()
+    const [credentials, setCredentials] = useState({'email':"",'password':""});
 
     const openLoginModal = () => {
         setModalLogin(true);
@@ -24,25 +25,30 @@ function Header() {
     const closeRegisterModal = () => {
         setModalIsOpen(false);
     };
-    const formHandler = async() => {
-        const response = await axios.post('http://localhost:5000/users/login/')
-        setCookies('token', response.access_token)
+    const formHandler = async(e) => {
+        e.preventDefault()
+        console.log(credentials);
+        const response = await axios.post('http://localhost:5000/users/login/',{user:credentials})
+        setCookies('token', response.data.accessToken)
     }
+    useEffect(() => {
+        console.log(credentials);
+    }, [credentials])
     //Модальное окно логина
     const loginModal = (
         <div className='window'>
             <div className='loginRegisterWindows'>
                 <div className='loginDivWindow'>
-                    <h1>Login</h1>
+                    <h1><u>Login</u></h1>
                 </div>
                 <div className='registerDivWindow'>
                     <h1>Register</h1>
                 </div>
             </div>
-            <div className='formLogin'>
+            <div onSubmit={formHandler} className='formLogin'>
                 <form>
-                    <input className='input-mail' type='text' placeholder='E-Mail'></input>
-                    <input className='input-password' type='password' placeholder='Password'></input>
+                    <input className='input-mail' type='text' placeholder='E-Mail' onChange={e=>{setCredentials({...credentials,email:e.target.value})}}></input>
+                    <input className='input-password' type='password' placeholder='Password' onChange={e=>{setCredentials({...credentials,password:e.target.value})}}></input>
                     <button className='login-button'>Login</button>
                 </form>
             </div>
@@ -56,11 +62,11 @@ function Header() {
                     <h1 className='active'>Login</h1>
                 </div>
                 <div className='registerDivWindow'>
-                    <h1>Register</h1>
+                    <h1><u>Register</u></h1>
                 </div>
             </div>
             <div className='formRegister'>
-                <form onSubmit={formHandler}>
+                <form>
                     <input className='input-name-register' type='text' placeholder='Name'></input>
                     <input className='input-mail-register' type='text' placeholder='E-Mail'></input>
                     <input className='input-mail-register' type='tel' placeholder='Phone'></input>

@@ -19,9 +19,9 @@ export default function Favourites() {
                         <div className='badges'>
                             <span>188500km</span>
                             <span>Diesel</span>
-                            <span>Automat</span>
-                            <span>Avant</span>
-                            <span>Foreground</span>
+                            <span>Automatic</span>
+                            <span>Toring</span>
+                            <span>Front-wheel drive</span>
                         </div>
                     </div>
                 </div>

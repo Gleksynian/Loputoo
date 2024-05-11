@@ -23,21 +23,21 @@ function Details() {
                 <h2>Skoda</h2>
                 <div className="horizontal-divs">
                     <div className='carInfo'>
-                        <p>Тип кузова: </p>
-                        <p>Год выпуска: </p>
-                        <p>Двигатель: </p>
-                        <p>Топливо: </p>
-                        <p>Пробег: </p>
-                        <p>Привод: </p>
-                        <p>Коробка передач: </p>
-                        <p>Цвет: </p>
-                        <p>Рег. номер: </p>
-                        <p>Город: </p>
-                        <p className='priceStyle'>Цена: </p>
-                        <p className='additionalInfo'>Дополнительная информация</p>
+                        <p>Body type: </p>
+                        <p>Year: </p>
+                        <p>Engine: </p>
+                        <p>Fuel: </p>
+                        <p>Mileage: </p>
+                        <p>Drivetrain: </p>
+                        <p>Transmission: </p>
+                        <p>Color: </p>
+                        <p>Reg. number: </p>
+                        <p>Location: </p>
+                        <p className='priceStyle'>Price: </p>
+                        <p className='additionalInfo'>Additional information</p>
                         <p className='additionalInfoText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus, augue non euismod condimentum, velit enim faucibus felis, nec volutpat turpis dolor ac dolor. Aliquam vel venenatis magna, quis posuere magna. Integer sollicitudin turpis quis velit fringilla iaculis. Vestibulum vitae nibh lobortis, gravida tortor sit amet, auctor dolor.</p>
-                        <button className='addToFavourites'>Добавить в избранное</button>
-                        <button>Связаться с продавцом</button>
+                        <button className='addToFavourites'>Add to favorites</button>
+                        <button>Contact the seller</button>
                     </div>
                     <div className="swiperdiv">
                         <Swiper
