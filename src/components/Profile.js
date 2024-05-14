@@ -13,15 +13,15 @@ function Profile() {
                     <p className='old-email'>e-mail@gmail.com</p>
                     <p className='old-phone-num'>+3725555555</p>
                     <form className='profile-change-form'>
-                        <input placeholder='Новый номер телефона' type='text'></input>
-                        <input placeholder='Новая почта' type='email'></input>
-                        <input placeholder='Старый пароль' type='password'></input>
-                        <input placeholder='Новый пароль' type='password'></input>
-                        <button type='submit'>Подтвердить</button>
+                        <input placeholder='New phone number' type='text'></input>
+                        <input placeholder='New e-mail' type='email'></input>
+                        <input placeholder='Old password' type='password'></input>
+                        <input placeholder='New password' type='password'></input>
+                        <button type='submit'>Confirm</button>
                     </form>
                 </div>
                 <div className='my-ads'>
-                    <h2 className='my-ads-header'>Мои объявления</h2>
+                    <h2 className='my-ads-header'>My ads</h2>
                     <div className='my-ad-list'>
                         <div className='my-ad-card'>
                             <img src={car} alt='car' />
@@ -31,10 +31,8 @@ function Profile() {
                                     <p className='ad-price'>13500e</p>
                                     <p className='ad-year'>2017</p>
                                 </div>
-                                <div className='my-ad-buttons'>
-                                    <button className='ad-edit-btn'>Редактировать</button>
-                                    <button className='ad-delete-btn'>Удалить</button>
-                                </div>
+                                    <button className='ad-edit-btn'>Edit</button>
+                                    <button className='ad-delete-btn'>Delete</button>
                             </div>
                         </div>
                     </div>

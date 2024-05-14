@@ -37,8 +37,6 @@ function PlaceAnAd() {
     }
     const formHandler = async (e) => {
         e.preventDefault();
-        // const res = await axios.get('http://localhost:5000/test/')
-        // console.log(res);
         var form = new FormData()
         form.append('car', JSON.stringify(car))
         form.append('img', fileRef.current.files[0])
@@ -107,7 +105,7 @@ function PlaceAnAd() {
                     <form className='adForm' onSubmit={(e) => { formHandler(e) }} encType='multipart/form-data'>
                         <div className='divAd'>
                             <div className='formDivAd'>
-                                <select onChange={(e) => {
+                                <select className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     brandHandler(e);
                                     setCurrentBrand(e.target.selectedOptions[0].value)
@@ -117,7 +115,7 @@ function PlaceAnAd() {
                                         return <option value={item.id} key={index}>{item.name}</option>
                                     })}
                                 </select>
-                                <select onChange={(e) => { handler(e); modelHandler(e) }} style={{ color: select }}>
+                                <select className='bodytype-select' onChange={(e) => { handler(e); modelHandler(e) }} style={{ color: select }}>
                                     <option hidden>Model</option>
                                     {models.filter(item => {
                                         if (item.brand_id === parseInt(currentBrand)) {
@@ -182,20 +180,34 @@ function PlaceAnAd() {
                                 </div>
                                 <select onChange={(e) => { handler(e); fuelHandler(e) }} style={{ color: select }} className='fuel-select'>
                                     <option hidden>Fuel</option>
-                                    <option>Дизель</option>
-                                    <option>Бензин</option>
-                                    <option>Электричество</option>
+                                    <option>Diesel</option>
+                                    <option>Petrol</option>
+                                    <option>Petrol + gas (LPG)</option>
+                                    <option>Petrol + gas (CNG)</option>
+                                    <option>Petrol + gas (LNG)</option>
+                                    <option>Diesel + gas (LNG)</option>
+                                    <option>Gas (LPG)</option>
+                                    <option>Gas (CNG)</option>
+                                    <option>Gas (LNG)</option>
+                                    <option>Hybrid</option>
+                                    <option>Hybrid (petrol / electric)</option>
+                                    <option>Hybrid (diesel / electric)</option>
+                                    <option>Plug-in hybrid (petrol/ electric)</option>
+                                    <option>Plug-in hybrid (diesel / electric)</option>
+                                    <option>Electric</option>
+                                    <option>Ethanol</option>
                                 </select>
                                 <select onChange={(e) => { handler(e); transmissionHandler(e) }} style={{ color: select }} className='gear-select'>
                                     <option hidden>Transmission</option>
-                                    <option>Автомат</option>
-                                    <option>Механическая коробка передач</option>
+                                    <option>Automatic</option>
+                                    <option>Manual</option>
+                                    <option>Semi-automatic</option>
                                 </select>
                                 <select onChange={(e) => { handler(e); drivetrainHandler(e) }} style={{ color: select }} className='transmission-select'>
                                     <option hidden>Drivetrain</option>
-                                    <option>Задние ведущие</option>
-                                    <option>Передние ведущие</option>
-                                    <option>4x4</option>
+                                    <option>Rear-wheel drive</option>
+                                    <option>Front-wheel drive</option>
+                                    <option>Four-wheel drive</option>
                                 </select>
                                 <select onChange={(e) => { handler(e); locationHandler(e) }} style={{ color: select }} className='location-select'>
                                     <option hidden>Location</option>

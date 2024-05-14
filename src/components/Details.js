@@ -3,62 +3,56 @@ import '../details.css'
 import '../App.css'
 import Header from './Header.js'
 import { useParams } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper/modules';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'swiper/css/effect-fade';
-import car1 from '../assets/car1.jpg'
-import car3 from '../assets/car3.jpg'
-import car2 from '../assets/car2.jpg'
+import axios from "axios";
+import { base_url } from "../config.js";
 
 function Details() {
     const { id } = useParams()
-    return (
-        <div>
-            <Header />
-            <div className='details'>
-                <h2>Skoda</h2>
-                <div className="horizontal-divs">
-                    <div className='carInfo'>
-                        <p>Body type: </p>
-                        <p>Year: </p>
-                        <p>Engine: </p>
-                        <p>Fuel: </p>
-                        <p>Mileage: </p>
-                        <p>Drivetrain: </p>
-                        <p>Transmission: </p>
-                        <p>Color: </p>
-                        <p>Reg. number: </p>
-                        <p>Location: </p>
-                        <p className='priceStyle'>Price: </p>
-                        <p className='additionalInfo'>Additional information</p>
-                        <p className='additionalInfoText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus, augue non euismod condimentum, velit enim faucibus felis, nec volutpat turpis dolor ac dolor. Aliquam vel venenatis magna, quis posuere magna. Integer sollicitudin turpis quis velit fringilla iaculis. Vestibulum vitae nibh lobortis, gravida tortor sit amet, auctor dolor.</p>
-                        <button className='addToFavourites'>Add to favorites</button>
-                        <button>Contact the seller</button>
-                    </div>
-                    <div className="swiperdiv">
-                        <Swiper
-                            modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade]}
-                            spaceBetween={0}
-                            slidesPerView={1}
-                            navigation
+    const [car, setCar] = useState()
+    const [phone, setPhone] = useState("Contact The Seller")
 
-                            onSwiper={(swiper) => console.log(swiper)}
-                            onSlideChange={() => console.log('slide change')}
-                            loop={true}
-                            effect="fade"
-                        >
-                            <SwiperSlide style={{backgroundImage:`url(${car1})`}}></SwiperSlide>
-                            <SwiperSlide style={{backgroundImage:`url(${car3})`}}></SwiperSlide>
-                            <SwiperSlide style={{backgroundImage:`url(${car2})`}}></SwiperSlide>
-                        </Swiper>
+    useEffect(() => {
+        const getCar = async () => {
+            const result = await axios.get(base_url + '/cars/' + id)
+            setCar(result.data)
+        }
+        getCar()
+    }, [])
+    return (
+        <>
+            {car ? (
+                <div>
+                    <Header />
+                    <div className='details'>
+                        <h2>{car.Brand.name + ' ' + car.Model.name}</h2>
+                        <div className="horizontal-divs">
+                            <div className='carInfo'>
+                                <p>Body type: {car.bodyType}</p>
+                                <p>Year: {car.year}</p>
+                                <p>Engine: {car.engine + ' ' + car.power + 'kW'}</p>
+                                <p>Fuel: {car.fuel}</p>
+                                <p>Mileage: {car.mileage}</p>
+                                <p>Drivetrain: {car.drivetrain}</p>
+                                <p>Transmission: {car.transmission}</p>
+                                <p>Color: {car.color}</p>
+                                <p>Reg. number: {car.number}</p>
+                                <p>Location: {car.City.name}</p>
+                                <p className='priceStyle'>Price: {car.price}</p>
+                                <p className='additionalInfo'>Additional information</p>
+                                <p className='additionalInfoText'>{car.description}</p>
+                                <button className='addToFavourites'>Add to favorites</button>
+                                <button onClick={()=>{
+                                    setPhone(car.User.phone)
+                                }}>{phone}</button>
+                            </div>
+                            <div className="swiperdiv">
+                                <img src={base_url + '/' + car.image} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            ) : (<></>)}
+        </>
     )
 }
 

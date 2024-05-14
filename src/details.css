@@ -68,6 +68,12 @@ border: none;
     z-index: 0;
 }
 
+.swiperdiv>img {
+    max-width: 596px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
 .swiperdiv>.swiper {
     width: 100%;
     height: 100%;

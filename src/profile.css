@@ -43,15 +43,14 @@
 
 .profile-change-form>button {
     color: #fff;
-    width: 53.26370757180157%;
-    padding: 14px;
+    width: 136px;
+    padding: 15px 20px;
     font-weight: bold;
     font-size: 24px;
     border: 2px solid #fff;
     border-radius: 10px;
     background: #002738;
-    margin-left: 23.49869451697128%;
-    padding: 15px 20px;
+    margin-left: 123px;
 }
 
 .profile-change-form>input::placeholder {
@@ -94,6 +93,8 @@
     border-radius: 10px;
     padding: 10px;
     font-weight: bold;
+    margin-left: 319px;
+    margin-top: 13.5%;
 }
 
 .ad-delete-btn {
@@ -104,7 +105,7 @@
     border-radius: 10px;
     padding: 10px;
     font-weight: bold;
-    margin-left: 45px;
+    margin-left: 50px;
 }
 
 .my-ad-card p {
