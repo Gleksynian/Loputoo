@@ -163,7 +163,7 @@ function PlaceAnAd() {
                                 <div className='ad-input'>
                                     <label className='engine-label'>Engine</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { engineHandler(e) }}></input>
+                                        <input type='text' min={0} onChange={(e) => { engineHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>

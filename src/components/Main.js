@@ -8,6 +8,7 @@ function Main() {
     const [select, setSelect] = useState("#00000050");
     const [brands, setBrands] = useState([])
     const [models, setModels] = useState([])
+    const [cities, setCities] = useState([])
     const [currentBrand, setCurrentBrand] = useState(-1)
     const [cars, setCars] = useState([])
     const [loading, setLoading] = useState(false)
@@ -20,15 +21,20 @@ function Main() {
             e.target.style.color = "#000"
         }
     }
+    const getCities = async () => {
+        const response = await axios.get(base_url + '/cities').then(async (data) => {
+            setCities(data.data)
+        })
+    }
     const getBrands = async () => {
         const response = await axios.get(base_url + '/brands').then(async (data) => {
             setBrands(data.data)
             await axios.get(base_url + '/models').then(async (data) => {
                 setModels(data.data)
-            await axios.get(base_url + '/cars').then(async (data) => {
-                setCars(data.data)
-                setLoading(true)
-            })
+                await axios.get(base_url + '/cars').then(async (data) => {
+                    setCars(data.data)
+                    setLoading(true)
+                })
             })
         })
         // setBrands(response.data)
@@ -43,7 +49,7 @@ function Main() {
     // }
     useEffect(() => {
         getBrands()
-
+        getCities()
     }, [])
 
     return (
@@ -150,12 +156,15 @@ function Main() {
                                 <option>Front-wheel drive</option>
                                 <option>Four-wheel drive</option>
                             </select>
-                            <select onChange={(e) => { handler(e) }} style={{ color: select }}>
+                            <select onChange={(e) => {
+                                handler(e);
+                                setCities(e.target.selectedOptions[0].value)
+                            }} style={{ color: select }}>
                                 <option hidden>Location</option>
                                 <option value={1}>All</option>
-                                <option>Кохтла-Ярве</option>
-                                <option>Таллинн</option>
-                                <option>Тарту</option>
+                                {cities.map((item, index) => {
+                                    return <option value={item.id} key={index}>{item.name}</option>
+                                })}
                             </select>
                             <button type='submit'>Search</button>
                         </form>
@@ -175,11 +184,11 @@ function Main() {
                                             <span className='newOffer'>
                                                 New offer
                                             </span>
-                                            <img style={{maxWidth:"444px", maxHeight: "296px", objectFit:"contain"}} src={base_url + '/' + item.image} alt='car' />
+                                            <img style={{ maxWidth: "444px", maxHeight: "296px", objectFit: "contain" }} src={base_url + '/' + item.image} alt='car' />
                                             <div>
                                                 <div className='mainInfo'>
-                                                    <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power} { }</p>
-                                                    <p>{item.price}</p>
+                                                    <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power + 'kW'} { }</p>
+                                                    <p>{item.price + ' €'}</p>
                                                     <p>{item.year}</p>
                                                 </div>
                                                 <div className='badges'>

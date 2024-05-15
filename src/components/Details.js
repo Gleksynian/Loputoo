@@ -37,7 +37,7 @@ function Details() {
                                 <p>Color: {car.color}</p>
                                 <p>Reg. number: {car.number}</p>
                                 <p>Location: {car.City.name}</p>
-                                <p className='priceStyle'>Price: {car.price}</p>
+                                <p className='priceStyle'>Price: {car.price + ' €'}</p>
                                 <p className='additionalInfo'>Additional information</p>
                                 <p className='additionalInfoText'>{car.description}</p>
                                 <button className='addToFavourites'>Add to favorites</button>
