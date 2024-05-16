@@ -47,6 +47,7 @@ function Header() {
     }
     const exitConfirm = () => {
         removeCookie('token')
+        removeCookie('currentUserId')
     }
 
     const formRegHandler = async (e) => {

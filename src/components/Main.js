@@ -45,16 +45,7 @@ function Main() {
                 })
             })
         })
-        // setBrands(response.data)
     }
-    // const getModels = async () => {
-    //     const response = await axios.get(base_url + '/models').then(data => setModels(data.data))
-    //     // setModels(response.data)
-    // }
-    // const getCars = async () => {
-    //     const response = await axios.get(base_url + '/cars').then(data => setCars(data.data))
-    //     // setCars(response.data)
-    // }
     useEffect(() => {
         getBrands()
         getCities()
