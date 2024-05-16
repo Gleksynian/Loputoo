@@ -6,11 +6,17 @@ import { base_url } from '../config.js';
 
 function Main() {
     const [select, setSelect] = useState("#00000050");
+
     const [brands, setBrands] = useState([])
+
     const [models, setModels] = useState([])
+
     const [cities, setCities] = useState([])
+
     const [currentBrand, setCurrentBrand] = useState(-1)
+
     const [cars, setCars] = useState([])
+
     const [loading, setLoading] = useState(false)
 
     const handler = (e) => {
@@ -21,11 +27,13 @@ function Main() {
             e.target.style.color = "#000"
         }
     }
+
     const getCities = async () => {
         const response = await axios.get(base_url + '/cities').then(async (data) => {
             setCities(data.data)
         })
     }
+
     const getBrands = async () => {
         const response = await axios.get(base_url + '/brands').then(async (data) => {
             setBrands(data.data)
