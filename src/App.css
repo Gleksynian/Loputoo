@@ -87,6 +87,7 @@ header ul li {
     padding: 30px;
     padding-top: 0;
     width: 23.07291666666667%;
+    margin-left: -50px;
 }
 
 .search-aside form>* {
@@ -181,6 +182,7 @@ label {
 
 .cardList {
     margin-top: 50px;
+    max-width: 1031px;
 }
 
 .card {
@@ -228,7 +230,7 @@ label {
     border-radius: 60px;
     padding: 6px 12px;
     font-size: 20px;
-    margin-right: 40px;
+    margin-right: 10px !important;
 }
 
 .ReactModal__Content--after-open {
@@ -460,4 +462,12 @@ ul>li>a {
 
 header ul + ul {
     margin-left: auto;
+}
+
+@media (max-width:1948px) {
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 }

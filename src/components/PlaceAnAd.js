@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Header from './Header.js'
-import '../placeAnAd.css'
-import photoAdForm from '../assets/photoAdForm.svg'
-import axios from 'axios'
-import { useCookies } from 'react-cookie'
+import React, { useEffect, useRef, useState } from 'react';
+import Header from './Header.js';
+import '../placeAnAd.css';
+import photoAdForm from '../assets/photoAdForm.svg';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import { base_url } from '../config.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,96 +11,125 @@ function PlaceAnAd() {
     const navigate = useNavigate();
     const [select, setSelect] = useState("#00000050");
     const [car, setCar] = useState({});
-    const [cookies, setCookies] = useCookies()
-    const fileRef = useRef(null)
+    const [cookies, setCookies] = useCookies();
+    const fileRef = useRef(null);
+    const [currentBrand, setCurrentBrand] = useState(-1);
+    const [brands, setBrands] = useState([]);
+    const [models, setModels] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const handler = (e) => {
         if (e.target.value == 0) {
-            e.target.style.color = "#00000050"
+            e.target.style.color = "#00000050";
         } else {
-            e.target.style.color = "#000"
+            e.target.style.color = "#000";
         }
-    }
-    const [currentBrand, setCurrentBrand] = useState(-1)
-    const [brands, setBrands] = useState([])
-    const [models, setModels] = useState([])
-    const [cities, setCities] = useState([])
+    };
 
     const getBrands = async () => {
-        const response = await axios.get(base_url + '/brands')
-        setBrands(response.data)
-    }
+        const response = await axios.get(base_url + '/brands');
+        setBrands(response.data);
+    };
+
     const getModels = async () => {
-        const response = await axios.get(base_url + '/models')
-        setModels(response.data)
-    }
+        const response = await axios.get(base_url + '/models');
+        setModels(response.data);
+    };
+
     const getCities = async () => {
-        const response = await axios.get(base_url + '/cities')
-        setCities(response.data)
-    }
+        const response = await axios.get(base_url + '/cities');
+        setCities(response.data);
+    };
+
     const formHandler = async (e) => {
         e.preventDefault();
-        var form = new FormData()
-        form.append('car', JSON.stringify(car))
-        form.append('img', fileRef.current.files[0])
+        var form = new FormData();
+        form.append('car', JSON.stringify(car));
+        form.append('img', fileRef.current.files[0]);
         await axios.post(base_url + '/cars', form, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 token: cookies.token
             }
-        })
-        alert("Ad has been placed")
+        });
+        alert("Ad has been placed");
         navigate('/');
-    }
+    };
+
     const brandHandler = (e) => {
-        setCar({ ...car, brand: e.target.value })
-    }
+        setCar({ ...car, brand: e.target.value });
+    };
+
     const modelHandler = (e) => {
-        setCar({ ...car, model: e.target.value })
-    }
+        setCar({ ...car, model: e.target.value });
+    };
+
     const bodyTypeHandler = (e) => {
-        setCar({ ...car, bodyType: e.target.value })
-    }
+        setCar({ ...car, bodyType: e.target.value });
+    };
+
     const yearHandler = (e) => {
-        setCar({ ...car, year: e.target.value })
-    }
+        setCar({ ...car, year: e.target.value });
+    };
+
     const priceHandler = (e) => {
-        setCar({ ...car, price: e.target.value })
-    }
+        setCar({ ...car, price: e.target.value });
+    };
+
     const powerHandler = (e) => {
-        setCar({ ...car, power: e.target.value })
-    }
+        setCar({ ...car, power: e.target.value });
+    };
+
     const mileageHandler = (e) => {
-        setCar({ ...car, mileage: e.target.value })
-    }
+        setCar({ ...car, mileage: e.target.value });
+    };
+
     const fuelHandler = (e) => {
-        setCar({ ...car, fuel: e.target.value })
-    }
+        setCar({ ...car, fuel: e.target.value });
+    };
+
     const transmissionHandler = (e) => {
-        setCar({ ...car, transmission: e.target.value })
-    }
+        setCar({ ...car, transmission: e.target.value });
+    };
+
     const drivetrainHandler = (e) => {
-        setCar({ ...car, drivetrain: e.target.value })
-    }
+        setCar({ ...car, drivetrain: e.target.value });
+    };
+
     const locationHandler = (e) => {
-        setCar({ ...car, city_id: e.target.value })
-    }
+        setCar({ ...car, city_id: e.target.value });
+    };
+
     const additionalInfoHandler = (e) => {
-        setCar({ ...car, description: e.target.value })
-    }
+        setCar({ ...car, description: e.target.value });
+    };
+
     const colorHandler = (e) => {
-        setCar({ ...car, color: e.target.value })
-    }
+        setCar({ ...car, color: e.target.value });
+    };
+
     const engineHandler = (e) => {
-        setCar({ ...car, engine: e.target.value })
-    }
+        setCar({ ...car, engine: e.target.value });
+    };
+
     const numberHandler = (e) => {
-        setCar({ ...car, number: e.target.value })
-    }
+        setCar({ ...car, number: e.target.value });
+    };
+
+    const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            setSelectedImage(URL.createObjectURL(file));
+        }
+    };
+
     useEffect(() => {
-        getBrands()
-        getModels()
-        getCities()
-    }, [])
+        getBrands();
+        getModels();
+        getCities();
+    }, []);
+
     return (
         <>
             <div>
@@ -112,21 +141,21 @@ function PlaceAnAd() {
                                 <select className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     brandHandler(e);
-                                    setCurrentBrand(e.target.selectedOptions[0].value)
+                                    setCurrentBrand(e.target.selectedOptions[0].value);
                                 }} style={{ color: select }}>
                                     <option hidden value={0}>Brand</option>
                                     {brands.map((item, index) => {
-                                        return <option value={item.id} key={index}>{item.name}</option>
+                                        return <option value={item.id} key={index}>{item.name}</option>;
                                     })}
                                 </select>
                                 <select className='bodytype-select' onChange={(e) => { handler(e); modelHandler(e) }} style={{ color: select }}>
                                     <option hidden>Model</option>
                                     {models.filter(item => {
                                         if (item.brand_id === parseInt(currentBrand)) {
-                                            return true
+                                            return true;
                                         }
                                     }).map((item, index) => {
-                                        return <option value={item.id} key={index}>{item.name}</option>
+                                        return <option value={item.id} key={index}>{item.name}</option>;
                                     })}
                                 </select>
                                 <select className='bodytype-select' onChange={(e) => { handler(e); bodyTypeHandler(e) }} style={{ color: select }}>
@@ -216,7 +245,7 @@ function PlaceAnAd() {
                                 <select onChange={(e) => { handler(e); locationHandler(e) }} style={{ color: select }} className='location-select'>
                                     <option hidden>Location</option>
                                     {cities.map((item, index) => {
-                                        return <option value={item.id} key={index}>{item.name}</option>
+                                        return <option value={item.id} key={index}>{item.name}</option>;
                                     })}
                                 </select>
                             </div>
@@ -228,8 +257,8 @@ function PlaceAnAd() {
                                 <div className='mainPhotoAd'>
                                     <label>Main photo</label>
                                     <label className='adPhotoLabel'>
-                                        <img className='image-photo' src={photoAdForm} />
-                                        <input type='file' name='car-image' ref={fileRef} hidden />
+                                        <img className='image-photo' src={selectedImage || photoAdForm} alt='car' />
+                                        <input type='file' name='car-image' ref={fileRef} hidden onChange={handleImageChange} />
                                     </label>
                                 </div>
                             </div>
@@ -239,6 +268,7 @@ function PlaceAnAd() {
                 </div>
             </div>
         </>
-    )
+    );
 }
-export default PlaceAnAd
+
+export default PlaceAnAd;
