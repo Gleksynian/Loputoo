@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 body {
@@ -233,16 +233,30 @@ label {
     margin-right: 10px !important;
 }
 
-.ReactModal__Content--after-open {
+.modalLoginStyle {
     width: 800px;
-    height: 526px;
+    height: 450px !important;
     justify-self: center;
-    margin-top: 100px;
+    margin-top: 175px !important;
     position: relative;
     background-color: #1C1C1C !important;
     border: 2px solid #fff !important;
     border-radius: 10px !important;
     overflow: visible !important;
+    margin: 0 auto;
+}
+
+.modalRegisterStyle {
+    width: 800px;
+    height: 526px !important;
+    justify-self: center;
+    margin-top: 175px !important;
+    position: relative;
+    background-color: #1C1C1C !important;
+    border: 2px solid #fff !important;
+    border-radius: 10px !important;
+    overflow: visible !important;
+    margin: 0 auto;
 }
 
 .window-login {
@@ -422,7 +436,8 @@ ul>li>a {
     color: #fff;
 }
 
-.search-aside form select,.search-aside form input{
+.search-aside form select,
+.search-aside form input {
     font-size: 22px;
     color: #000;
 }
@@ -437,22 +452,22 @@ ul>li>a {
     margin-top: 20px;
 }
 
-.search-aside form >*{
+.search-aside form>* {
     display: block;
     width: 100%;
     border-radius: 0;
 }
 
-.main-div>*:nth-child(2){
+.main-div>*:nth-child(2) {
     flex-grow: 2;
 }
 
-.range-input div input{
+.range-input div input {
     flex-grow: 1;
     max-width: 45%;
 }
 
-.range-input div{
+.range-input div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -460,7 +475,7 @@ ul>li>a {
     width: 100%;
 }
 
-header ul + ul {
+header ul+ul {
     margin-left: auto;
 }
 
@@ -470,10 +485,12 @@ header ul + ul {
         flex-wrap: wrap;
         gap: 10px;
     }
+
     .top-panel {
         max-width: 1031px;
         max-width: 100%;
     }
+
     .cardList {
         display: flex;
         flex-direction: column;

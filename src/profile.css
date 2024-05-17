@@ -96,6 +96,7 @@
     font-weight: bold;
     height: 49px;
     width: 66px;
+    margin-right: 20px;
 }
 
 .ad-delete-btn {
@@ -105,7 +106,6 @@
     border: 2px solid #fff;
     border-radius: 10px;
     font-weight: bold;
-    margin-left: 50px;
     height: 49px;
     width: 97px;
 }
@@ -120,11 +120,6 @@
     object-fit: contain;
     max-width: 353px;
     max-height: 224px;
-}
-
-.my-ad-buttons {
-    margin-left: 458px;
-    margin-bottom: 15px;
 }
 
 .ad-name {
@@ -147,9 +142,8 @@
     }
 
     .my-ad-buttons {
-        width: 100%;
         margin-bottom: 15px;
-        float: right;
+        margin-left: 880px;
     }
 
     .my-ad-card>img {

@@ -127,20 +127,20 @@ function Header() {
                             <button onClick={(exitConfirm)}>Logout</button>
                         </li>
                         <li style={{ border: 'none' }}>
-                            <button><a style={{textDecoration: "none", color:'#fff'}} href={'/profile/'+ cookies.currentUserId.id}>{cookies.currentUserId.name}</a></button>
+                            <button><a style={{ textDecoration: "none", color: '#fff' }} href={'/profile/' + cookies.currentUserId.id}>{cookies.currentUserId.name}</a></button>
                         </li>
                     </>
                 ) : (<>
                     <li>
                         <button onClick={openLoginModal}>Login</button>
                     </li>
-                    <Modal isOpen={modalLogin} onRequestClose={closeLoginModal}>
+                    <Modal className='modalLoginStyle' isOpen={modalLogin} onRequestClose={closeLoginModal}>
                         {loginModal}
                     </Modal>
                     <li>
                         <button onClick={openRegisterModal}>Register</button>
                     </li>
-                    <Modal isOpen={modalRegister} onRequestClose={closeRegisterModal}>
+                    <Modal className='modalRegisterStyle' isOpen={modalRegister} onRequestClose={closeRegisterModal}>
                         {registerModal}
                     </Modal>
 
