@@ -20,7 +20,7 @@ export default function Favorites() {
     return (
         <>
             <Header />
-            {cars.length ? (<div className='cardList'>
+            {cars.length ? (<div className='cardList-favorites'>
                 {cars.map((item, index) => {
                     return (
                         <div className='card-favourites'>

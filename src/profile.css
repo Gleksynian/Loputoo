@@ -138,3 +138,23 @@
 .my-ad-list {
     width: 100%
 }
+
+@media (max-width:3840px) {
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .my-ad-buttons {
+        width: 100%;
+        margin-bottom: 15px;
+        float: right;
+    }
+
+    .my-ad-card>img {
+        object-fit: contain;
+        max-width: 706px;
+        max-height: 448px;
+    }
+}

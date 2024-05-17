@@ -464,10 +464,19 @@ header ul + ul {
     margin-left: auto;
 }
 
-@media (max-width:1948px) {
+@media (max-width:3840px) {
     .badges {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+    }
+    .top-panel {
+        max-width: 1031px;
+        max-width: 100%;
+    }
+    .cardList {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
     }
 }

@@ -1,7 +1,7 @@
-.cardList {
+.cardList-favorites {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Выравниваем по центру по горизонтали */
+    justify-content: center;
     margin-top: 50px;
 }
 
@@ -9,6 +9,7 @@
     width: 1377px;
     background-color: #1C1C1C !important;
     border-radius: 0;
+    justify-content: center;
 }
 
 .card-favourites>a {
