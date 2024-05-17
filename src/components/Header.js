@@ -4,6 +4,7 @@ import '../App.css'
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { base_url } from '../config.js';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -12,6 +13,7 @@ function Header() {
     const [cookies, setCookies, removeCookie] = useCookies()
     const [credentials, setCredentials] = useState({ 'email': "", 'password': "" });
     const [registerCredentials, setregisterCredentials] = useState({ 'name': "", "email": "", "phone": "", "password": "", "confirmPassword": "" })
+    const navigate = useNavigate();
 
     // const openLogoutConfirm = () => {
     //     setOpenLogoutConfirm(true);
@@ -38,7 +40,7 @@ function Header() {
     };
     const formHandler = async (e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:5000/users/login/', { user: credentials })
+        const response = await axios.post(base_url + '/users/login/', { user: credentials })
         setCookies('token', response.data.accessToken)
         setCookies('currentUserId', response.data.existUser)
     }
@@ -46,8 +48,9 @@ function Header() {
 
     }
     const exitConfirm = () => {
-        removeCookie('token')
-        removeCookie('currentUserId')
+        removeCookie('token', { path: '/' });
+        removeCookie('currentUserId', { path: '/' });
+        navigate('/');
     }
 
     const formRegHandler = async (e) => {
@@ -55,9 +58,10 @@ function Header() {
         const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials })
         const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials })
         setCookies('token', responseLogin.data.accessToken)
+        setCookies('currentUserId', responseLogin.data.existUser);
     }
     useEffect(() => {
-        console.log(registerCredentials);
+        // console.log(registerCredentials);
     }, [registerCredentials])
     //Модальное окно логина
     const loginModal = (
@@ -73,7 +77,7 @@ function Header() {
             <div onSubmit={formHandler} className='formLogin'>
                 <form>
                     <input className='input-mail' type='text' placeholder='E-Mail' onChange={e => { setCredentials({ ...credentials, email: e.target.value }) }}></input>
-                    <input className='input-password' type='password' placeholder='Password' onChange={e => { setCredentials({ ...credentials, password: e.target.value }) }}></input>
+                    <input className='input-password' type='password' min={8} placeholder='Password' onChange={e => { setCredentials({ ...credentials, password: e.target.value }) }}></input>
                     <button className='login-button'>Login</button>
                 </form>
             </div>
@@ -97,8 +101,8 @@ function Header() {
                     <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, name: e.target.value }) }} className='input-name-register' type='text' placeholder='Name'></input>
                     <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, email: e.target.value }) }} className='input-mail-register' type='text' placeholder='E-Mail'></input>
                     <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, phone: e.target.value }) }} className='input-mail-register' type='tel' placeholder='Phone'></input>
-                    <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, password: e.target.value }) }} className='input-password-register' type='password' placeholder='Password'></input>
-                    <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, confirmPassword: e.target.value }) }} className='input-password-again' type='password' placeholder='Confirm password'></input>
+                    <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, password: e.target.value }) }} className='input-password-register' type='password' min={8} placeholder='Password'></input>
+                    <input onChange={(e) => { setregisterCredentials({ ...registerCredentials, confirmPassword: e.target.value }) }} className='input-password-again' type='password' min={8} placeholder='Confirm password'></input>
                     <button className='register-button' type='submit'>Register</button>
                 </form>
             </div>
@@ -113,7 +117,7 @@ function Header() {
                     <a href='/placeAnAd'>Create Ad</a>
                 </li>
                 <li>
-                    <a href='/favourites'>Favorites</a>
+                    <a href='/favorites'>Favorites</a>
                 </li>
             </ul>
             <ul className='login-register'>

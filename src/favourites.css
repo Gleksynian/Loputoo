@@ -1,20 +1,18 @@
-.card-favourites {
-    background-color: #1C1C1C !important;
-    display: flex !important;
-    flex-direction: row;
-    border: 2px solid #fff;
-    border-radius: 0;
-    padding: 8px;
-    width: 80%;
-    margin: 0% 10%;
-}
-
-.cardList>a {
-    text-decoration: none;
-}
-
 .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Выравниваем по центру по горизонтали */
     margin-top: 50px;
+}
+
+.card-favourites {
+    width: 1377px;
+    background-color: #1C1C1C !important;
+    border-radius: 0;
+}
+
+.card-favourites>a {
+    text-decoration: none !important;
 }
 
 .card-favourites .mainInfo {
@@ -22,7 +20,24 @@
     color: #fff;
 }
 
+.card-favourites .card .mainInfo>p {
+    margin-bottom: 0px !important;
+}
+
 .card-favourites img {
-    width: 444px;
-    margin-right: 80px;
+    max-width: 444px;
+    max-height: 296px;
+    margin-right: 70px;
+}
+
+.card-favourites .card {
+    height: 312px;
+}
+
+.badges span {
+    border: 1px solid #fff;
+    border-radius: 60px;
+    padding: 6px 12px;
+    font-size: 20px;
+    margin-right: 40px;
 }

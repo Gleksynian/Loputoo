@@ -5,9 +5,10 @@ import photoAdForm from '../assets/photoAdForm.svg'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { base_url } from '../config.js';
-
+import { useNavigate } from 'react-router-dom';
 
 function PlaceAnAd() {
+    const navigate = useNavigate();
     const [select, setSelect] = useState("#00000050");
     const [car, setCar] = useState({});
     const [cookies, setCookies] = useCookies()
@@ -23,6 +24,7 @@ function PlaceAnAd() {
     const [brands, setBrands] = useState([])
     const [models, setModels] = useState([])
     const [cities, setCities] = useState([])
+
     const getBrands = async () => {
         const response = await axios.get(base_url + '/brands')
         setBrands(response.data)
@@ -40,12 +42,14 @@ function PlaceAnAd() {
         var form = new FormData()
         form.append('car', JSON.stringify(car))
         form.append('img', fileRef.current.files[0])
-        await axios.post('http://localhost:5000/cars/', form, {
+        await axios.post(base_url + '/cars', form, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 token: cookies.token
             }
         })
+        alert("Ad has been placed")
+        navigate('/');
     }
     const brandHandler = (e) => {
         setCar({ ...car, brand: e.target.value })
@@ -143,7 +147,7 @@ function PlaceAnAd() {
                                     </div>
                                 </div>
                                 <div className='ad-input'>
-                                    <label>Price</label>
+                                    <label>Price (€)</label>
                                     <div>
                                         <input type='number' min={0} onChange={(e) => { priceHandler(e) }}></input>
                                     </div>

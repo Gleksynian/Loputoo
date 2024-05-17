@@ -1,50 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import '../profile.css';
 import Header from './Header.js';
-import car from "../assets/car.png";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { base_url } from '../config.js';
+import { base_url, base_url2 } from '../config.js';
 
 function Profile() {
     const { id } = useParams();
     const [user, setUser] = useState(null);
     const [cars, setCars] = useState([]);
+    const [brands, setBrands] = useState({});
+    const [models, setModels] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getUser = async () => {
-            try {
-                const result = await axios.get(base_url + '/users/' + id);
-                setUser(result.data);
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
+            const result = await axios.get(base_url + '/users/' + id);
+            setUser(result.data);
         };
 
         const findCarsByUserId = async () => {
-            try {
-                const result = await axios.get(base_url + '/users/' + id + '/ads');
-                setCars(result.data);
-            } catch (error) {
-                console.error("Error fetching user ads:", error);
-            }
+            const result = await axios.get(`${base_url}/users/${id}/ads`);
+            setCars(result.data);
+        };
+
+        const getBrands = async () => {
+            const result = await axios.get(`${base_url}/brands`);
+            const brandsMap = result.data.reduce((acc, brand) => {
+                acc[brand.id] = brand.name;
+                return acc;
+            }, {});
+            setBrands(brandsMap);
+        };
+
+        const getModels = async () => {
+            const result = await axios.get(`${base_url}/models`);
+            const modelsMap = result.data.reduce((acc, model) => {
+                acc[model.id] = model.name;
+                return acc;
+            }, {});
+            setModels(modelsMap);
         };
 
         const fetchData = async () => {
             setLoading(true);
-            await Promise.all([getUser(), findCarsByUserId()]);
+            await Promise.all([getUser(), findCarsByUserId(), getBrands(), getModels()]);
             setLoading(false);
         };
 
         fetchData();
     }, [id]);
-
     return (
         <>
             <Header />
             {loading ? (
-                <p>Loading...</p>
+                <></>
             ) : user ? (
                 <div className='profile-page'>
                     <div className='profile-change'>
@@ -62,22 +72,25 @@ function Profile() {
                     <div className='my-ads'>
                         <h2 className='my-ads-header'>My ads</h2>
                         <div className='my-ad-list'>
-                            {cars.map((item, index) => {
+                            {cars.map((item) => {
+                                const brandName = brands[item.brand];
+                                const modelName = models[item.model];
                                 return (
                                     <div className='my-ad-card' key={item.id}>
-                                        <img src={base_url + '/' + item.image} />
+                                        <img src={base_url2 + '/' + item.image} alt='Img' />
                                         <div>
                                             <div className='my-ad-card-info'>
-                                                <p className='ad-name'>{(item.Brand && item.Brand.name) + ' ' + (item.Model && item.Model.name)}</p>
-
-                                                <p className='ad-price'>{item.price}e</p>
+                                                <p className='ad-name'>{brandName + ' ' + modelName + ' ' + item.engine + ' ' + item.power + 'kW'}</p>
+                                                <p className='ad-price'>{item.price + ' €'}</p>
                                                 <p className='ad-year'>{item.year}</p>
                                             </div>
-                                            <button className='ad-edit-btn'>Edit</button>
-                                            <button className='ad-delete-btn'>Delete</button>
+                                            <div className='my-ad-buttons'>
+                                                <button className='ad-edit-btn'>Edit</button>
+                                                <button className='ad-delete-btn'>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
-                                )
+                                );
                             })}
                         </div>
                     </div>
@@ -85,7 +98,7 @@ function Profile() {
             ) : (<></>)
             }
         </>
-    )
+    );
 }
 
 export default Profile;

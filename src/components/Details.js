@@ -4,12 +4,43 @@ import '../App.css'
 import Header from './Header.js'
 import { useParams } from 'react-router-dom'
 import axios from "axios";
-import { base_url } from "../config.js";
+import { base_url, base_url2 } from "../config.js";
+import { useCookies } from "react-cookie";
 
 function Details() {
     const { id } = useParams()
     const [car, setCar] = useState()
     const [phone, setPhone] = useState("Contact The Seller")
+    const [isFavorites, setIsFavorites] = useState(false)
+    const [cookies, setCookie] = useCookies()
+    const addToFavorites = async () => {
+        await axios.post(base_url + '/favorites/' + id, {}, {
+            headers: {
+                token: cookies.token
+            }
+        })
+        setIsFavorites(true)
+    }
+    const deleteFromFavorites = async () => {
+        await axios.delete(base_url + '/favorites/' + id, {
+            headers: {
+                token: cookies.token
+            }
+        })
+        setIsFavorites(false)
+    }
+
+    const checkIsInFavorites = async () => {
+        if (cookies.token) {
+            const response = await axios.get(base_url + '/favorites/' + id, {
+                headers: {
+                    token: cookies.token
+                }
+            })
+            console.log(response);
+            setIsFavorites(response.data)
+        }
+    }
 
     useEffect(() => {
         const getCar = async () => {
@@ -17,6 +48,7 @@ function Details() {
             setCar(result.data)
         }
         getCar()
+        checkIsInFavorites()
     }, [])
     return (
         <>
@@ -40,13 +72,18 @@ function Details() {
                                 <p className='priceStyle'>Price: {car.price + ' €'}</p>
                                 <p className='additionalInfo'>Additional information</p>
                                 <p className='additionalInfoText'>{car.description}</p>
-                                <button className='addToFavourites'>Add to favorites</button>
-                                <button onClick={()=>{
+                                {cookies.token ? (isFavorites ?
+                                    <button onClick={deleteFromFavorites} className='addToFavourites'>Delete from favorites</button>
+                                    :
+                                    <button onClick={addToFavorites} className='addToFavourites'>Add to favorites</button>)
+                                    :<></>
+                                }
+                                <button onClick={() => {
                                     setPhone(car.User.phone)
                                 }}>{phone}</button>
                             </div>
                             <div className="swiperdiv">
-                                <img src={base_url + '/' + car.image} />
+                                <img src={base_url2 + '/' + car.image} />
                             </div>
                         </div>
                     </div>
