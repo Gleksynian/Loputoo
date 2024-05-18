@@ -50,22 +50,36 @@ function Profile() {
 
         fetchData();
     }, [id]);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const updatedUser = {
+            name: event.target.elements.name.value,
+            email: event.target.elements.email.value,
+            phone: event.target.elements.phone.value,
+            oldPassword: event.target.elements.oldPassword.value,
+            newPassword: event.target.elements.newPassword.value,
+        };
+        await axios.put(base_url + '/users/' + id, updatedUser);
+        window.location.reload();
+    };
+
     return (
         <>
             <Header />
             {loading ? (
                 <></>
             ) : user ? (
-                <div className='profile-page'>
+                <div className='profile-page fade-in'>
                     <div className='profile-change'>
                         <h2 className='username'>{user.name}</h2>
                         <p className='old-email'>{user.email}</p>
                         <p className='old-phone-num'>{user.phone}</p>
-                        <form className='profile-change-form'>
-                            <input placeholder='New phone number' type='text' />
-                            <input placeholder='New e-mail' type='email' />
-                            <input placeholder='Old password' type='password' />
-                            <input placeholder='New password' type='password' />
+                        <form className='profile-change-form' onSubmit={handleSubmit}>
+                            <input placeholder='New phone number' type='text' name='phone' />
+                            <input placeholder='New e-mail' type='email' name='email' />
+                            <input placeholder='Old password' type='password' name='oldPassword' />
+                            <input placeholder='New password' type='password' name='newPassword' />
                             <button type='submit'>Confirm</button>
                         </form>
                     </div>
@@ -78,15 +92,15 @@ function Profile() {
                                 return (
                                     <div className='my-ad-card' key={item.id}>
                                         <img src={base_url2 + '/' + item.image} alt='Img' />
-                                        <div>
+                                        <div className='my-ad-card-div'>
                                             <div className='my-ad-card-info'>
                                                 <p className='ad-name'>{brandName + ' ' + modelName + ' ' + item.engine + ' ' + item.power + 'kW'}</p>
                                                 <p className='ad-price'>{item.price + ' €'}</p>
                                                 <p className='ad-year'>{item.year}</p>
                                             </div>
                                             <div className='my-ad-buttons'>
-                                                <button className='ad-edit-btn'>Edit</button>
                                                 <button className='ad-delete-btn'>Delete</button>
+                                                <button className='ad-edit-btn'>Edit</button>
                                             </div>
                                         </div>
                                     </div>

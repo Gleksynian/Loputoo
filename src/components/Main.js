@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header.js';
 import axios from 'axios';
 import { base_url, base_url2 } from '../config.js';
+import moment from 'moment';
 
 function Main() {
     const [select, setSelect] = useState("#00000050");
@@ -23,18 +24,45 @@ function Main() {
     };
 
     const getCities = async () => {
-        const response = await axios.get(base_url + '/cities');
-        setCities(response.data);
+        try {
+            const response = await axios.get(base_url + '/cities');
+            if (Array.isArray(response.data)) {
+                setCities(response.data);
+            } else {
+                console.error("Cities response is not an array:", response.data);
+            }
+        } catch (error) {
+            console.error("Error fetching cities:", error);
+        }
     };
 
     const getBrands = async () => {
-        const response = await axios.get(base_url + '/brands');
-        setBrands(response.data);
-        const modelsResponse = await axios.get(base_url + '/models');
-        setModels(modelsResponse.data);
-        const carsResponse = await axios.get(base_url + '/cars');
-        setCars(carsResponse.data);
-        setLoading(true);
+        try {
+            const response = await axios.get(base_url + '/brands');
+            if (Array.isArray(response.data)) {
+                setBrands(response.data);
+            } else {
+                console.error("Brands response is not an array:", response.data);
+            }
+
+            const modelsResponse = await axios.get(base_url + '/models');
+            if (Array.isArray(modelsResponse.data)) {
+                setModels(modelsResponse.data);
+            } else {
+                console.error("Models response is not an array:", modelsResponse.data);
+            }
+
+            const carsResponse = await axios.get(base_url + '/cars');
+            if (Array.isArray(carsResponse.data)) {
+                setCars(carsResponse.data);
+            } else {
+                console.error("Cars response is not an array:", carsResponse.data);
+            }
+
+            setLoading(true);
+        } catch (error) {
+            console.error("Error fetching brands, models, or cars:", error);
+        }
     };
 
     useEffect(() => {
@@ -66,6 +94,13 @@ function Main() {
     };
 
     const sortCars = (cars) => {
+        cars.sort((a, b) => {
+            const isNewA = moment().diff(moment(a.createdAt), 'hours') < 6;
+            const isNewB = moment().diff(moment(b.createdAt), 'hours') < 6;
+            if (isNewA && !isNewB) return -1;
+            if (!isNewA && isNewB) return 1;
+            return 0;
+        });
         switch (sortOrder) {
             case 'year-asc':
                 return cars.sort((a, b) => a.year - b.year);
@@ -87,6 +122,15 @@ function Main() {
                 return cars;
         }
     };
+    const clearFilters = () => {
+        setFilter({});
+        setCurrentBrand(-1);
+        const selectElements = document.querySelectorAll('select');
+        selectElements.forEach(select => {
+            select.selectedIndex = 0;
+            select.style.color = "#00000050";
+        });
+    };
 
     const filteredCars = sortCars(cars.filter(matchesFilter));
 
@@ -95,7 +139,7 @@ function Main() {
             {loading ? (
                 <>
                     <Header />
-                    <div className='main-div'>
+                    <div className='main-div  fade-in'>
                         <aside className='search-aside'>
                             <form>
                                 <select
@@ -104,8 +148,7 @@ function Main() {
                                         setCurrentBrand(e.target.selectedOptions[0].value);
                                         setFilter({ ...filter, brand_id: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }}>
                                     <option hidden value={0}>Brand</option>
                                     {brands.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
@@ -116,8 +159,7 @@ function Main() {
                                         handler(e);
                                         setFilter({ ...filter, model_id: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }}>
                                     <option hidden>Model</option>
                                     {models.filter(item => item.brand_id === parseInt(currentBrand)).map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
@@ -128,8 +170,7 @@ function Main() {
                                         handler(e);
                                         setFilter({ ...filter, bodyType: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }}>
                                     <option hidden>Body type</option>
                                     <option value={1}>All</option>
                                     <option>Touring</option>
@@ -179,70 +220,53 @@ function Main() {
                                         setFilter({ ...filter, fuel: e.target.selectedOptions[0].value });
                                     }}
                                     style={{ color: select }}
-                                    className='fuel-select'
-                                >
+                                    className='fuel-select'>
                                     <option hidden>Fuel</option>
                                     <option value={1}>All</option>
                                     <option>Diesel</option>
                                     <option>Petrol</option>
                                     <option>Petrol + gas (LPG)</option>
                                     <option>Petrol + gas (CNG)</option>
-                                    <option>Petrol + gas (LNG)</option>
-                                    <option>Diesel + gas (LNG)</option>
-                                    <option>Gas (LPG)</option>
-                                    <option>Gas (CNG)</option>
-                                    <option>Gas (LNG)</option>
                                     <option>Hybrid</option>
-                                    <option>Hybrid (petrol / electric)</option>
-                                    <option>Hybrid (diesel / electric)</option>
-                                    <option>Plug-in hybrid (petrol/ electric)</option>
-                                    <option>Plug-in hybrid (diesel / electric)</option>
                                     <option>Electric</option>
-                                    <option>Ethanol</option>
                                 </select>
                                 <select
-                                    contentEditable='false'
-                                    spellCheck='false'
                                     onChange={(e) => {
                                         handler(e);
                                         setFilter({ ...filter, transmission: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }}>
                                     <option hidden>Transmission</option>
                                     <option value={1}>All</option>
-                                    <option>Automatic</option>
                                     <option>Manual</option>
-                                    <option>Semi-automatic</option>
+                                    <option>Automatic</option>
                                 </select>
                                 <select
                                     onChange={(e) => {
                                         handler(e);
                                         setFilter({ ...filter, drivetrain: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }}>
                                     <option hidden>Drivetrain</option>
                                     <option value={1}>All</option>
-                                    <option>Rear-wheel drive</option>
-                                    <option>Front-wheel drive</option>
-                                    <option>Four-wheel drive</option>
+                                    <option>Front</option>
+                                    <option>Back</option>
+                                    <option>4x4</option>
+                                    <option>AWD</option>
                                 </select>
                                 <select
                                     onChange={(e) => {
                                         handler(e);
-                                        setCities(e.target.selectedOptions[0].value);
                                         setFilter({ ...filter, location: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }}
-                                >
+                                    style={{ color: select }} В>
                                     <option hidden>Location</option>
                                     <option value={1}>All</option>
                                     {cities.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
                                     ))}
                                 </select>
-                                <button type='submit'>Search</button>
+                                <button type="button" onClick={clearFilters}>Clear Filters</button>
                             </form>
                         </aside>
                         <div>
@@ -264,8 +288,10 @@ function Main() {
                                 {filteredCars.map((item, index) => (
                                     <a href={'/cardetails/' + item.id} key={index}>
                                         <div className='card'>
-                                            <span className='newOffer'>New offer</span>
-                                            <img style={{ maxWidth: "444px", maxHeight: "296px", objectFit: "contain" }} src={base_url2 + '/' + item.image} alt='car' />
+                                            {moment().diff(moment(item.createdAt), 'hours') < 6 && (
+                                                <span className='newOffer'>New offer</span>
+                                            )}
+                                            <img src={base_url2 + '/' + item.image} alt='car' />
                                             <div>
                                                 <div className='mainInfo'>
                                                     <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power + 'kW'} { }</p>

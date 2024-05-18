@@ -134,7 +134,7 @@ function PlaceAnAd() {
         <>
             <div>
                 <Header />
-                <div className='placeAdDiv'>
+                <div className='placeAdDiv fade-in'>
                     <form className='adForm' onSubmit={(e) => { formHandler(e) }} encType='multipart/form-data'>
                         <div className='divAd'>
                             <div className='formDivAd'>

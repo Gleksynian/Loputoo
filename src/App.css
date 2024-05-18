@@ -123,6 +123,10 @@ header ul li {
     border: 2px solid #fff;
     border-radius: 10px;
     transition-duration: 0.5s;
+    width: 201px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 
 .search-aside form button:hover {
@@ -158,7 +162,7 @@ header ul li {
 .sort-select {
     background-color: #000;
     border: none;
-    color: #fff;
+    color: #fff !important;
     font-size: 24px;
 }
 
@@ -210,7 +214,9 @@ label {
 }
 
 .card img {
-    width: 444px;
+    max-width: 444px;
+    max-height: 296px;
+    object-fit: contain;
     margin-right: 80px;
 }
 
@@ -231,6 +237,10 @@ label {
     padding: 6px 12px;
     font-size: 20px;
     margin-right: 10px !important;
+}
+
+.ReactModal__Overlay--after-open {
+    background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .modalLoginStyle {
@@ -496,4 +506,24 @@ header ul+ul {
         flex-direction: column;
         max-width: 100%;
     }
+}
+
+.fade-in {
+    animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-reg-log {
+    animation: fadeIn ease 0.5s;
 }

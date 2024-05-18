@@ -142,8 +142,14 @@
     }
 
     .my-ad-buttons {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
         margin-bottom: 15px;
-        margin-left: 880px;
+        margin-right: 15px;
+    }
+    .my-ad-card-div {
+        width: 100%;
     }
 
     .my-ad-card>img {

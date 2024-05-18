@@ -156,3 +156,11 @@ form>select {
 .formDivAd select option {
     color: black;
 }
+
+.transition {
+    transition: all 0.3s ease-in-out;
+}
+
+.fade-in.active {
+    opacity: 1;
+}
