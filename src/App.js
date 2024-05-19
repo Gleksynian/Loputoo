@@ -7,6 +7,7 @@ import PlaceAnAd from './components/PlaceAnAd'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Favorites from './components/Favorites'
 import Profile from './components/Profile'
+import EditAnAd from './components/EditAnAd'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/placeAnAd" element={<PlaceAnAd />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/profile/:id" element={<Profile />} />
+                    <Route path='/editAnAd/:id' element={<EditAnAd />} />
                 </Routes>
             </Router>
         </>
