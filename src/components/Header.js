@@ -33,7 +33,7 @@ function Header() {
 
     const formHandler = async (e) => {
         e.preventDefault()
-        const response = await axios.post(base_url + '/users/login/', { user: credentials })
+        const response = await axios.post(base_url + '/users/login/', { user: credentials }, {withCredentials:true})
         setCookies('token', response.data.accessToken)
         setCookies('currentUserId', response.data.existUser)
     }
@@ -46,8 +46,8 @@ function Header() {
 
     const formRegHandler = async (e) => {
         e.preventDefault()
-        const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials })
-        const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials })
+        const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, {withCredentials:true})
+        const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, {withCredentials:true})
         setCookies('token', responseLogin.data.accessToken)
         setCookies('currentUserId', responseLogin.data.existUser);
     }
@@ -77,7 +77,6 @@ function Header() {
         </div>
     );
     useEffect(() => {
-        // console.log(registerCredentials);
     }, [registerCredentials])
     const loginModal = (
         <div className='window'>
