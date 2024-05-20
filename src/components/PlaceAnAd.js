@@ -172,7 +172,7 @@ function PlaceAnAd() {
                                 <div className='ad-input'>
                                     <label>Year</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { yearHandler(e) }}></input>
+                                        <input type='number' min={1900} onChange={(e) => { yearHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>

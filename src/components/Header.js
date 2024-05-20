@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
     const [modalLogin, setModalLogin] = useState(false);
     const [modalRegister, setModalRegister] = useState(false);
-    const [cookies, setCookies, removeCookie] = useCookies();
+    const [cookies, setCookies, removeCookie] = useCookies(['token', 'currentUserId']);
     const [credentials, setCredentials] = useState({ 'email': "", 'password': "" });
     const [registerCredentials, setRegisterCredentials] = useState({ 'name': "", "email": "", "phone": "", "password": "", "confirmPassword": "" });
     const navigate = useNavigate();
@@ -32,11 +32,16 @@ function Header() {
     };
 
     const formHandler = async (e) => {
-        e.preventDefault()
-        const response = await axios.post(base_url + '/users/login/', { user: credentials }, {withCredentials:true})
-        setCookies('token', response.data.accessToken)
-        setCookies('currentUserId', response.data.existUser)
-    }
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${base_url}/users/login/`, { user: credentials }, { withCredentials: true });
+            setCookies('token', response.data.accessToken, { path: '/' });
+            setCookies('currentUserId', response.data.existUser, { path: '/' });
+            closeLoginModal();
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+    };
 
     const exitConfirm = () => {
         removeCookie('token', { path: '/' });
@@ -45,12 +50,17 @@ function Header() {
     };
 
     const formRegHandler = async (e) => {
-        e.preventDefault()
-        const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, {withCredentials:true})
-        const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, {withCredentials:true})
-        setCookies('token', responseLogin.data.accessToken)
-        setCookies('currentUserId', responseLogin.data.existUser);
-    }
+        e.preventDefault();
+        try {
+            const responseRegister = await axios.post(`${base_url}/users/register/`, { user: registerCredentials }, { withCredentials: true });
+            const responseLogin = await axios.post(`${base_url}/users/login/`, { user: registerCredentials }, { withCredentials: true });
+            setCookies('token', responseLogin.data.accessToken, { path: '/' });
+            setCookies('currentUserId', responseLogin.data.existUser, { path: '/' });
+            closeRegisterModal();
+        } catch (error) {
+            console.error('Error during registration:', error);
+        }
+    };
 
     const registerModal = (
         <div className='window-register'>
