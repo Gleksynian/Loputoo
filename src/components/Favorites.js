@@ -28,23 +28,25 @@ export default function Favorites() {
             {cars.length ? (
                 <div className='cardList-favorites fade-in'>
                     {cars.map((item, index) => {
+                        const brandName = item.Car.Brand ? item.Car.Brand.name : 'Unknown Brand';
+                        const modelName = item.Car.Model ? item.Car.Model.name : 'Unknown Model';
                         return (
                             <div className='card-favourites' key={index}>
-                                <a href={'/cardetails/' + item.id} key={index}>
+                                <a href={'/cardetails/' + item.Car.id}>
                                     <div className='card'>
-                                        <img style={{ maxWidth: "444px", maxHeight: "296px", objectFit: "contain" }} src={base_url2 + '/' + item.image} alt='car' />
+                                        <img style={{ maxWidth: "444px", maxHeight: "296px", objectFit: "contain" }} src={base_url2 + '/' + item.Car.image} alt='car' />
                                         <div>
                                             <div className='mainInfo'>
-                                                <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power + 'kW'} { }</p>
-                                                <p>{item.price + ' €'}</p>
-                                                <p>{item.year}</p>
+                                                <p>{`${brandName} ${modelName} ${item.Car.engine} ${item.Car.power}kW`}</p>
+                                                <p>{`${item.Car.price} €`}</p>
+                                                <p>{item.Car.year}</p>
                                             </div>
                                             <div className='badges'>
-                                                <span>{item.mileage}</span>
-                                                <span>{item.fuel}</span>
-                                                <span>{item.transmission}</span>
-                                                <span>{item.bodyType}</span>
-                                                <span>{item.drivetrain}</span>
+                                                <span>{item.Car.mileage}</span>
+                                                <span>{item.Car.fuel}</span>
+                                                <span>{item.Car.transmission}</span>
+                                                <span>{item.Car.bodyType}</span>
+                                                <span>{item.Car.drivetrain}</span>
                                             </div>
                                         </div>
                                     </div>

@@ -21,7 +21,7 @@ function Profile() {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const result = await axios.get(`${base_url}/users/${id}`);
+                const result = await axios.get(base_url + '/users/' + id);
                 setUser(result.data);
             } catch (error) {
                 console.error('Error fetching user:', error);

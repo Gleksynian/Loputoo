@@ -34,7 +34,7 @@ function Header() {
     const formHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${base_url}/users/login/`, { user: credentials }, { withCredentials: true });
+            const response = await axios.post(base_url + '/users/login/', { user: credentials }, { withCredentials: true });
             setCookies('token', response.data.accessToken, { path: '/' });
             setCookies('currentUserId', response.data.existUser, { path: '/' });
             closeLoginModal();
@@ -52,8 +52,8 @@ function Header() {
     const formRegHandler = async (e) => {
         e.preventDefault();
         try {
-            const responseRegister = await axios.post(`${base_url}/users/register/`, { user: registerCredentials }, { withCredentials: true });
-            const responseLogin = await axios.post(`${base_url}/users/login/`, { user: registerCredentials }, { withCredentials: true });
+            const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, { withCredentials: true });
+            const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, { withCredentials: true });
             setCookies('token', responseLogin.data.accessToken, { path: '/' });
             setCookies('currentUserId', responseLogin.data.existUser, { path: '/' });
             closeRegisterModal();
