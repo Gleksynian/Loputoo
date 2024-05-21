@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { base_url, base_url2 } from '../config.js';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { useCookies } from 'react-cookie';
 
 function Profile() {
     const { id } = useParams();
@@ -15,9 +16,22 @@ function Profile() {
     const [models, setModels] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [cookies, setCookies] = useCookies();
+    const deleteAd = async (id) => {
+        await axios.delete(base_url + '/cars/' + id, { headers: { token: cookies.token}});
+        findCarsByUserId();
+    }
     const [visibleOldPassword, setVisibleOldPassword] = useState(false);
     const [visibleNewPassword, setVisibleNewPassword] = useState(false);
-
+    const findCarsByUserId = async () => {
+        try {
+            const result = await axios.get(`${base_url}/users/${id}/ads`);
+            setCars(result.data);
+        } catch (error) {
+            console.error('Error fetching user ads:', error);
+            setError('Failed to load user ads.');
+        }
+    };
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -26,16 +40,6 @@ function Profile() {
             } catch (error) {
                 console.error('Error fetching user:', error);
                 setError('Failed to load user data.');
-            }
-        };
-
-        const findCarsByUserId = async () => {
-            try {
-                const result = await axios.get(`${base_url}/users/${id}/ads`);
-                setCars(result.data);
-            } catch (error) {
-                console.error('Error fetching user ads:', error);
-                setError('Failed to load user ads.');
             }
         };
 
@@ -161,7 +165,7 @@ function Profile() {
                                                 <p className='ad-year'>{item.year}</p>
                                             </div>
                                             <div className='my-ad-buttons'>
-                                                <button className='ad-delete-btn'>Delete</button>
+                                                <button onClick={() => {deleteAd(item.id)}} className='ad-delete-btn'>Delete</button>
                                                 <button className='ad-edit-btn' onClick={() => navigate(`/editAnAd/${item.id}`)}>Edit</button>
                                             </div>
                                         </div>
