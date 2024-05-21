@@ -28,8 +28,6 @@ export default function Favorites() {
             {cars.length ? (
                 <div className='cardList-favorites fade-in'>
                     {cars.map((item, index) => {
-                        const brandName = item.Car.Brand ? item.Car.Brand.name : 'Unknown Brand';
-                        const modelName = item.Car.Model ? item.Car.Model.name : 'Unknown Model';
                         return (
                             <div className='card-favourites' key={index}>
                                 <a href={'/cardetails/' + item.Car.id}>
@@ -37,7 +35,7 @@ export default function Favorites() {
                                         <img style={{ maxWidth: "444px", maxHeight: "296px", objectFit: "contain" }} src={base_url2 + '/' + item.Car.image} alt='car' />
                                         <div>
                                             <div className='mainInfo'>
-                                                <p>{`${brandName} ${modelName} ${item.Car.engine} ${item.Car.power}kW`}</p>
+                                                <p>{`${item.Car.Brand.name} ${item.Car.Model.name} ${item.Car.engine} ${item.Car.power}kW`}</p>
                                                 <p>{`${item.Car.price} €`}</p>
                                                 <p>{item.Car.year}</p>
                                             </div>
