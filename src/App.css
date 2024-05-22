@@ -341,7 +341,21 @@ label {
 }
 
 .input-password {
+    width: 700px !important;
     margin-top: 20px;
+    border: 2px solid #fff !important;
+    font-size: 24px;
+    height: 46px !important;
+    border-radius: 10px !important;
+    background-color: #1C1C1C !important;
+    color: #fff !important;
+}
+
+.input-password::placeholder {
+    color: #fff !important;
+    opacity: 75% !important;
+    padding-left: 20px !important;
+    font-weight: normal !important;
 }
 
 .button-btn {
@@ -400,17 +414,30 @@ label {
     padding: 10px 23px;
     margin-top: 50px;
 }
-
-.input-password-again {
-    margin-top: 12px;
-}
-
 .input-mail-register {
     margin-top: 12px;
 }
 
-.input-password-register {
+.input-password-register, .input-password-again {
+    width: 700px !important;
     margin-top: 12px;
+    border: 2px solid #fff !important;
+    font-size: 24px;
+    height: 46px !important;
+    border-radius: 10px !important;
+    background-color: #1C1C1C !important;
+    color: #fff !important;
+}
+
+.input-password-again::placeholder, .input-password-register::placeholder {
+    color: #fff !important;
+    opacity: 75% !important;
+    padding-left: 20px !important;
+    font-weight: normal !important;
+}
+
+.input-password-again {
+    margin-top: -13px !important;
 }
 
 .input-name-register {

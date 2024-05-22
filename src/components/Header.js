@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import '../App.css';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { base_url } from '../config.js';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
@@ -14,6 +15,9 @@ function Header() {
     const [credentials, setCredentials] = useState({ 'email': "", 'password': "" });
     const [registerCredentials, setRegisterCredentials] = useState({ 'name': "", "email": "", "phone": "", "password": "", "confirmPassword": "" });
     const [loading, setLoading] = useState(false);
+    const [visiblePassword, setVisiblePassword] = useState(false);
+    const [visibleRegisterPassword, setVisibleRegisterPassword] = useState(false);
+    const [visibleRegisterConfirmPassword, setVisibleRegisterConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
     const openLoginModal = () => {
@@ -34,7 +38,7 @@ function Header() {
 
     const formHandler = async (e) => {
         e.preventDefault();
-        setLoading(true)
+        setLoading(true);
         try {
             const response = await axios.post(base_url + '/users/login/', { user: credentials }, { withCredentials: true });
             setCookies('token', response.data.accessToken, { path: '/' });
@@ -55,7 +59,7 @@ function Header() {
 
     const formRegHandler = async (e) => {
         e.preventDefault();
-        setLoading(true)
+        setLoading(true);
         try {
             const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, { withCredentials: true });
             const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, { withCredentials: true });
@@ -67,6 +71,18 @@ function Header() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const toggleVisiblePassword = () => {
+        setVisiblePassword(!visiblePassword);
+    };
+
+    const toggleVisibleRegisterPassword = () => {
+        setVisibleRegisterPassword(!visibleRegisterPassword);
+    };
+
+    const toggleVisibleRegisterConfirmPassword = () => {
+        setVisibleRegisterConfirmPassword(!visibleRegisterConfirmPassword);
     };
 
     const registerModal = (
@@ -86,15 +102,24 @@ function Header() {
                     <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, name: e.target.value }) }} className='input-name-register' type='text' placeholder='Name'></input>
                     <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, email: e.target.value }) }} className='input-mail-register' type='text' placeholder='E-Mail'></input>
                     <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, phone: e.target.value }) }} className='input-mail-register' type='tel' placeholder='Phone'></input>
-                    <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, password: e.target.value }) }} className='input-password-register' type='password' minLength={8} placeholder='Password'></input>
-                    <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, confirmPassword: e.target.value }) }} className='input-password-again' type='password' min={8} placeholder='Confirm password'></input>
+                    <div className='password-input'>
+                        <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, password: e.target.value }) }} className='input-password-register' type={visibleRegisterPassword ? 'text' : 'password'} minLength={8} placeholder='Password'></input>
+                        <div className='eye-icon' onClick={toggleVisibleRegisterPassword} style={{ color: '#fff', fontSize: '24px', marginTop: '5px'}}>
+                            {visibleRegisterPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </div>
+                    </div>
+                    <div className='password-input'>
+                        <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, confirmPassword: e.target.value }) }} className='input-password-again' type={visibleRegisterConfirmPassword ? 'text' : 'password'} minLength={8} placeholder='Confirm password'></input>
+                        <div className='eye-icon' onClick={toggleVisibleRegisterConfirmPassword} style={{ color: '#fff', fontSize: '24px', marginTop: '-10px' }}>
+                            {visibleRegisterConfirmPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </div>
+                    </div>
                     <button className='register-button' type='submit'>Register</button>
                 </form>
             </div>
         </div>
     );
-    useEffect(() => {
-    }, [registerCredentials])
+
     const loginModal = (
         <div className='window'>
             <div className='loginRegisterWindows'>
@@ -108,7 +133,12 @@ function Header() {
             <div onSubmit={formHandler} className='formLogin'>
                 <form>
                     <input className='input-mail' type='text' placeholder='E-Mail' onChange={e => { setCredentials({ ...credentials, email: e.target.value }) }}></input>
-                    <input className='input-password' type='password' minLength={8} placeholder='Password' onChange={e => { setCredentials({ ...credentials, password: e.target.value }) }}></input>
+                    <div className='password-input'>
+                        <input className='input-password' type={visiblePassword ? 'text' : 'password'} minLength={8} placeholder='Password' onChange={e => { setCredentials({ ...credentials, password: e.target.value }) }}></input>
+                        <div className='eye-icon' onClick={toggleVisiblePassword} style={{ color: '#fff', marginTop: '12px', fontSize: '24px' }}>
+                            {visiblePassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </div>
+                    </div>
                     <button className='login-button' type='submit'>Login</button>
                 </form>
             </div>
@@ -135,12 +165,12 @@ function Header() {
                     {cookies.token ? (
                         <>
                             <li>
-                                <button onClick={(exitConfirm)}>Logout</button>
+                                <button onClick={exitConfirm}>Logout</button>
                             </li>
                             <li style={{ border: 'none' }}>
                                 <button>
                                     {cookies.currentUserId ? (
-                                        <a style={{ textDecoration: "none", color: '#fff' }} href={'/profile/' + cookies.currentUserId.id}>{cookies.currentUserId.name}</a>
+                                        <a style={{ textDecoration: 'none', color: '#fff' }} href={'/profile/' + cookies.currentUserId.id}>{cookies.currentUserId.name}</a>
                                     ) : (
                                         'Loading...'
                                     )}
@@ -167,7 +197,6 @@ function Header() {
             </header>
         </>
     );
-
 }
 
 export default Header;

@@ -39,6 +39,7 @@
     border-radius: none !important;
     margin-bottom: 25px !important;
     height: 50px !important;
+    font-size: 22px;
 }
 
 .profile-change-form>button {

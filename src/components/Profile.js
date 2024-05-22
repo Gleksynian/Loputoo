@@ -135,14 +135,14 @@ function Profile() {
                             <input placeholder='New phone number' type='text' name='phone' />
                             <input placeholder='New e-mail' type='email' name='email' />
                             <div className='password-input'>
-                                <input placeholder='Old password' type={visibleOldPassword ? 'text' : 'password'} minLength={8} name='oldPassword' />
-                                <div className='eye-icon' onClick={toggleVisibleOldPassword}>
+                                <input style={{fontSize: '22px'}} placeholder='Old password' type={visibleOldPassword ? 'text' : 'password'} minLength={8} name='oldPassword' />
+                                <div className='eye-icon' onClick={toggleVisibleOldPassword} style={{fontSize: '24px'}}>
                                     {visibleOldPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                 </div>
                             </div>
                             <div className='password-input'>
-                                <input placeholder='New password' type={visibleNewPassword ? 'text' : 'password'} minLength={8} name='newPassword' />
-                                <div className='eye-icon' onClick={toggleVisibleNewPassword}>
+                                <input style={{fontSize: '22px'}} placeholder='New password' type={visibleNewPassword ? 'text' : 'password'} minLength={8} name='newPassword' />
+                                <div className='eye-icon' onClick={toggleVisibleNewPassword} style={{fontSize: '24px'}}>
                                     {visibleNewPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                 </div>
                             </div>
