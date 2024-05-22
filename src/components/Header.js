@@ -13,6 +13,7 @@ function Header() {
     const [cookies, setCookies, removeCookie] = useCookies(['token', 'currentUserId']);
     const [credentials, setCredentials] = useState({ 'email': "", 'password': "" });
     const [registerCredentials, setRegisterCredentials] = useState({ 'name': "", "email": "", "phone": "", "password": "", "confirmPassword": "" });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const openLoginModal = () => {
@@ -33,6 +34,7 @@ function Header() {
 
     const formHandler = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             const response = await axios.post(base_url + '/users/login/', { user: credentials }, { withCredentials: true });
             setCookies('token', response.data.accessToken, { path: '/' });
@@ -40,6 +42,8 @@ function Header() {
             closeLoginModal();
         } catch (error) {
             console.error('Error during login:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -51,6 +55,7 @@ function Header() {
 
     const formRegHandler = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, { withCredentials: true });
             const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, { withCredentials: true });
@@ -59,6 +64,8 @@ function Header() {
             closeRegisterModal();
         } catch (error) {
             console.error('Error during registration:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -109,48 +116,56 @@ function Header() {
     );
 
     return (
-        <header>
-            <h1><Link to="/">AutoKaup24</Link></h1>
-            <ul>
-                {cookies.token && (
-                    <li>
-                        <Link to="/placeAnAd">Create Ad</Link>
-                    </li>
-                )}
-                {cookies.token && (
-                    <li>
-                        <Link to="/favorites">Favorites</Link>
-                    </li>
-                )}
-            </ul>
-            <ul className='login-register'>
-                {cookies.token ? (
-                    <>
+        <>
+            <header>
+                <h1><Link to="/">AutoKaup24</Link></h1>
+                <ul>
+                    {cookies.token && (
                         <li>
-                            <button onClick={(exitConfirm)}>Logout</button>
+                            <Link to="/placeAnAd">Create Ad</Link>
                         </li>
-                        <li style={{ border: 'none' }}>
-                            <button><a style={{ textDecoration: "none", color: '#fff' }} href={'/profile/' + cookies.currentUserId.id}>{cookies.currentUserId.name}</a></button>
-                        </li>
-                    </>
-                ) : (
-                    <>
+                    )}
+                    {cookies.token && (
                         <li>
-                            <button onClick={openLoginModal}>Login</button>
-                            <Modal className='modalLoginStyle fade-in-reg-log' isOpen={modalLogin} onRequestClose={closeLoginModal}>
-                                {loginModal}
-                            </Modal>
+                            <Link to="/favorites">Favorites</Link>
                         </li>
-                        <li>
-                            <button onClick={openRegisterModal}>Register</button>
-                            <Modal className='modalRegisterStyle fade-in-reg-log' isOpen={modalRegister} onRequestClose={closeRegisterModal}>
-                                {registerModal}
-                            </Modal>
-                        </li>
-                    </>
-                )}
-            </ul>
-        </header>
+                    )}
+                </ul>
+                <ul className='login-register'>
+                    {cookies.token ? (
+                        <>
+                            <li>
+                                <button onClick={(exitConfirm)}>Logout</button>
+                            </li>
+                            <li style={{ border: 'none' }}>
+                                <button>
+                                    {cookies.currentUserId ? (
+                                        <a style={{ textDecoration: "none", color: '#fff' }} href={'/profile/' + cookies.currentUserId.id}>{cookies.currentUserId.name}</a>
+                                    ) : (
+                                        'Loading...'
+                                    )}
+                                </button>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <button onClick={openLoginModal}>Login</button>
+                                <Modal className='modalLoginStyle fade-in-reg-log' isOpen={modalLogin} onRequestClose={closeLoginModal}>
+                                    {loginModal}
+                                </Modal>
+                            </li>
+                            <li>
+                                <button onClick={openRegisterModal}>Register</button>
+                                <Modal className='modalRegisterStyle fade-in-reg-log' isOpen={modalRegister} onRequestClose={closeRegisterModal}>
+                                    {registerModal}
+                                </Modal>
+                            </li>
+                        </>
+                    )}
+                </ul>
+            </header>
+        </>
     );
 
 }
