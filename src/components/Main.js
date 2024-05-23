@@ -172,7 +172,6 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Body type</option>
-                                    <option value={1}>All</option>
                                     <option>Touring</option>
                                     <option>Sedan</option>
                                     <option>Hatchback</option>
@@ -222,13 +221,22 @@ function Main() {
                                     style={{ color: select }}
                                     className='fuel-select'>
                                     <option hidden>Fuel</option>
-                                    <option value={1}>All</option>
                                     <option>Diesel</option>
                                     <option>Petrol</option>
                                     <option>Petrol + gas (LPG)</option>
                                     <option>Petrol + gas (CNG)</option>
+                                    <option>Petrol + gas (LNG)</option>
+                                    <option>Diesel + gas (LNG)</option>
+                                    <option>Gas (LPG)</option>
+                                    <option>Gas (CNG)</option>
+                                    <option>Gas (LNG)</option>
                                     <option>Hybrid</option>
+                                    <option>Hybrid (petrol / electric)</option>
+                                    <option>Hybrid (diesel / electric)</option>
+                                    <option>Plug-in hybrid (petrol/ electric)</option>
+                                    <option>Plug-in hybrid (diesel / electric)</option>
                                     <option>Electric</option>
+                                    <option>Ethanol</option>
                                 </select>
                                 <select
                                     onChange={(e) => {
@@ -237,9 +245,9 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Transmission</option>
-                                    <option value={1}>All</option>
-                                    <option>Manual</option>
                                     <option>Automatic</option>
+                                    <option>Manual</option>
+                                    <option>Semi-automatic</option>
                                 </select>
                                 <select
                                     onChange={(e) => {
@@ -248,11 +256,9 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Drivetrain</option>
-                                    <option value={1}>All</option>
-                                    <option>Front</option>
-                                    <option>Back</option>
-                                    <option>4x4</option>
-                                    <option>AWD</option>
+                                    <option>Rear-wheel drive</option>
+                                    <option>Front-wheel drive</option>
+                                    <option>Four-wheel drive</option>
                                 </select>
                                 <select
                                     onChange={(e) => {
