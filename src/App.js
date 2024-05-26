@@ -20,7 +20,7 @@ function App() {
                     <Route path="/placeAnAd" element={<PlaceAnAd />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/profile/:id" element={<Profile />} />
-                    <Route path='/editAnAd/:id' element={<EditAnAd />} />
+                    <Route path='/editAnAd/:carId' element={<EditAnAd />} />
                 </Routes>
             </Router>
         </>

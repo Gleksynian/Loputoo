@@ -4,10 +4,11 @@ import '../placeAnAd.css';
 import photoAdForm from '../assets/photoAdForm.svg';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { base_url } from '../config.js';
-import { useNavigate } from 'react-router-dom';
+import { base_url, base_url2 } from '../config.js';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PlaceAnAd() {
+    const { carId } = useParams()
     const navigate = useNavigate();
     const [select, setSelect] = useState("#00000050");
     const [car, setCar] = useState({});
@@ -47,13 +48,13 @@ function PlaceAnAd() {
         var form = new FormData();
         form.append('car', JSON.stringify(car));
         form.append('img', fileRef.current.files[0]);
-        await axios.post(base_url + '/cars', form, {
+        await axios.patch(base_url + '/cars/' + carId, form, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 token: cookies.token
             }
         });
-        alert("Ad has been placed");
+        alert("Ad has been updated successfully!");
         navigate('/');
     };
 
@@ -128,6 +129,16 @@ function PlaceAnAd() {
         getBrands();
         getModels();
         getCities();
+        const getCar = async() => {
+            const response = await axios.get(base_url + '/cars/' + carId, {
+                headers: {
+                    token: cookies.token
+                }
+            })
+            console.log(response.data);
+            setCar(response.data);
+        }
+        getCar();
     }, []);
 
     return (
@@ -138,7 +149,7 @@ function PlaceAnAd() {
                     <form className='adForm' onSubmit={(e) => { formHandler(e) }} encType='multipart/form-data'>
                         <div className='divAd'>
                             <div className='formDivAd'>
-                                <select className='bodytype-select' onChange={(e) => {
+                                <select value={car.brand} className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     brandHandler(e);
                                     setCurrentBrand(e.target.selectedOptions[0].value);
@@ -148,7 +159,7 @@ function PlaceAnAd() {
                                         return <option value={item.id} key={index}>{item.name}</option>;
                                     })}
                                 </select>
-                                <select className='bodytype-select' onChange={(e) => { handler(e); modelHandler(e) }} style={{ color: select }}>
+                                <select value={car.model} className='bodytype-select' onChange={(e) => { handler(e); modelHandler(e) }} style={{ color: select }}>
                                     <option hidden>Model</option>
                                     {models.filter(item => {
                                         if (item.brand_id === parseInt(currentBrand)) {
@@ -158,7 +169,7 @@ function PlaceAnAd() {
                                         return <option value={item.id} key={index}>{item.name}</option>;
                                     })}
                                 </select>
-                                <select className='bodytype-select' onChange={(e) => { handler(e); bodyTypeHandler(e) }} style={{ color: select }}>
+                                <select value={car.bodyType} className='bodytype-select' onChange={(e) => { handler(e); bodyTypeHandler(e) }} style={{ color: select }}>
                                     <option hidden>Body type</option>
                                     <option>Touring</option>
                                     <option>Sedan</option>
@@ -172,46 +183,46 @@ function PlaceAnAd() {
                                 <div className='ad-input'>
                                     <label>Year</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { yearHandler(e) }}></input>
+                                        <input type='number' value={car.year} min={0} onChange={(e) => { yearHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label>Price (€)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { priceHandler(e) }}></input>
+                                        <input type='number' value={car.price} min={0} onChange={(e) => { priceHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='powerLabel'>Power (kW)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { powerHandler(e) }}></input>
+                                        <input type='number' value={car.power} min={0} onChange={(e) => { powerHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='mileage-label'>Mileage (km)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { mileageHandler(e) }}></input>
+                                        <input type='number' value={car.mileage} min={0} onChange={(e) => { mileageHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Engine</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { engineHandler(e) }}></input>
+                                        <input type='text' value={car.engine} min={0} onChange={(e) => { engineHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Color</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { colorHandler(e) }}></input>
+                                        <input type='text' value={car.color} min={0} onChange={(e) => { colorHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Reg. number</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { numberHandler(e) }}></input>
+                                        <input type='text' value={car.number} min={0} onChange={(e) => { numberHandler(e) }}></input>
                                     </div>
                                 </div>
-                                <select onChange={(e) => { handler(e); fuelHandler(e) }} style={{ color: select }} className='fuel-select'>
+                                <select value={car.fuel} onChange={(e) => { handler(e); fuelHandler(e) }} style={{ color: select }} className='fuel-select'>
                                     <option hidden>Fuel</option>
                                     <option>Diesel</option>
                                     <option>Petrol</option>
@@ -230,19 +241,19 @@ function PlaceAnAd() {
                                     <option>Electric</option>
                                     <option>Ethanol</option>
                                 </select>
-                                <select onChange={(e) => { handler(e); transmissionHandler(e) }} style={{ color: select }} className='gear-select'>
+                                <select value={car.transmission} onChange={(e) => { handler(e); transmissionHandler(e) }} style={{ color: select }} className='gear-select'>
                                     <option hidden>Transmission</option>
                                     <option>Automatic</option>
                                     <option>Manual</option>
                                     <option>Semi-automatic</option>
                                 </select>
-                                <select onChange={(e) => { handler(e); drivetrainHandler(e) }} style={{ color: select }} className='transmission-select'>
+                                <select value={car.drivetrain} onChange={(e) => { handler(e); drivetrainHandler(e) }} style={{ color: select }} className='transmission-select'>
                                     <option hidden>Drivetrain</option>
                                     <option>Rear-wheel drive</option>
                                     <option>Front-wheel drive</option>
                                     <option>Four-wheel drive</option>
                                 </select>
-                                <select onChange={(e) => { handler(e); locationHandler(e) }} style={{ color: select }} className='location-select'>
+                                <select value={car.city_id} onChange={(e) => { handler(e); locationHandler(e) }} style={{ color: select }} className='location-select'>
                                     <option hidden>Location</option>
                                     {cities.map((item, index) => {
                                         return <option value={item.id} key={index}>{item.name}</option>;
@@ -252,12 +263,12 @@ function PlaceAnAd() {
                             <div>
                                 <div className='additionalInfoAd'>
                                     <label>Additional information</label>
-                                    <textarea onChange={(e) => { additionalInfoHandler(e) }} className='additionalInputAd' type='text'></textarea>
+                                    <textarea value={car.description} onChange={(e) => { additionalInfoHandler(e) }} className='additionalInputAd' type='text'></textarea>
                                 </div>
                                 <div className='mainPhotoAd'>
                                     <label>Main photo</label>
                                     <label className='adPhotoLabel'>
-                                        <img className='image-photo' src={selectedImage || photoAdForm} alt='car' />
+                                        <img className='image-photo' src={selectedImage || base_url2 + '/' + car.image} alt='car' />
                                         <input type='file' name='car-image' ref={fileRef} hidden onChange={handleImageChange} />
                                     </label>
                                 </div>
