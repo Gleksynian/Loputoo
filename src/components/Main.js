@@ -71,13 +71,13 @@ function Main() {
     }, []);
 
     const matchesFilter = (item) => {
-        if (filter.brand_id && item.Brand.id !== parseInt(filter.brand_id)) return false;
-        if (filter.model_id && item.Model.id !== parseInt(filter.model_id)) return false;
-        if (filter.bodyType && item.bodyType !== filter.bodyType) return false;
-        if (filter.fuel && item.fuel !== filter.fuel) return false;
-        if (filter.transmission && item.transmission !== filter.transmission) return false;
-        if (filter.drivetrain && item.drivetrain !== filter.drivetrain) return false;
-        if (filter.location && item.cityId !== parseInt(filter.location)) return false;
+        if (filter.brand_id && filter.brand_id !== 'All' && item.Brand.id !== parseInt(filter.brand_id)) return false;
+        if (filter.model_id && filter.model_id !== 'All' && item.Model.id !== parseInt(filter.model_id)) return false;
+        if (filter.bodyType && filter.bodyType !== 'All' && item.bodyType !== filter.bodyType) return false;
+        if (filter.fuel && filter.fuel !== 'All' && item.fuel !== filter.fuel) return false;
+        if (filter.transmission && filter.transmission !== 'All' && item.transmission !== filter.transmission) return false;
+        if (filter.drivetrain && filter.drivetrain !== 'All' && item.drivetrain !== filter.drivetrain) return false;
+        if (filter.location && filter.location !== 'All' && item.cityId !== parseInt(filter.location)) return false;
         if (filter.minPrice && item.price < parseInt(filter.minPrice)) return false;
         if (filter.maxPrice && item.price > parseInt(filter.maxPrice)) return false;
         if (filter.minYear && item.year < parseInt(filter.minYear)) return false;
@@ -88,6 +88,7 @@ function Main() {
         if (filter.maxMileage && item.mileage > parseInt(filter.maxMileage)) return false;
         return true;
     };
+
 
     const handleSortChange = (e) => {
         setSortOrder(e.target.value);
@@ -132,7 +133,28 @@ function Main() {
         });
     };
 
-    const filteredCars = sortCars(cars.filter(matchesFilter));
+    const filteredCars = sortCars(cars.filter(item => {
+        if (
+            !filter.brand_id &&
+            !filter.model_id &&
+            !filter.bodyType &&
+            !filter.fuel &&
+            !filter.transmission &&
+            !filter.drivetrain &&
+            !filter.location &&
+            !filter.minPrice &&
+            !filter.maxPrice &&
+            !filter.minYear &&
+            !filter.maxYear &&
+            !filter.minPower &&
+            !filter.maxPower &&
+            !filter.minMileage &&
+            !filter.maxMileage
+        ) {
+            return true;
+        }
+        return matchesFilter(item);
+    }));
 
     return (
         <>
@@ -149,7 +171,8 @@ function Main() {
                                         setFilter({ ...filter, brand_id: e.target.selectedOptions[0].value });
                                     }}
                                     style={{ color: select }}>
-                                    <option hidden value={0}>Brand</option>
+                                    <option hidden>Brand</option>
+                                    <option>All</option>
                                     {brands.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
                                     ))}
@@ -161,6 +184,7 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Model</option>
+                                    <option>All</option>
                                     {models.filter(item => item.brand_id === parseInt(currentBrand)).map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
                                     ))}
@@ -172,6 +196,7 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Body type</option>
+                                    <option>All</option>
                                     <option>Touring</option>
                                     <option>Sedan</option>
                                     <option>Hatchback</option>
@@ -221,6 +246,7 @@ function Main() {
                                     style={{ color: select }}
                                     className='fuel-select'>
                                     <option hidden>Fuel</option>
+                                    <option>All</option>
                                     <option>Diesel</option>
                                     <option>Petrol</option>
                                     <option>Petrol + gas (LPG)</option>
@@ -245,6 +271,7 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Transmission</option>
+                                    <option>All</option>
                                     <option>Automatic</option>
                                     <option>Manual</option>
                                     <option>Semi-automatic</option>
@@ -256,6 +283,7 @@ function Main() {
                                     }}
                                     style={{ color: select }}>
                                     <option hidden>Drivetrain</option>
+                                    <option>All</option>
                                     <option>Rear-wheel drive</option>
                                     <option>Front-wheel drive</option>
                                     <option>Four-wheel drive</option>
@@ -267,7 +295,7 @@ function Main() {
                                     }}
                                     style={{ color: select }} В>
                                     <option hidden>Location</option>
-                                    <option value={1}>All</option>
+                                    <option>All</option>
                                     {cities.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
                                     ))}

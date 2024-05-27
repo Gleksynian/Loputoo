@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../profile.css';
 import Header from './Header.js';
 import axios from 'axios';
+import Modal from 'react-modal';
 import { useParams, useNavigate } from 'react-router-dom';
 import { base_url, base_url2 } from '../config.js';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
@@ -10,6 +11,7 @@ import { useCookies } from 'react-cookie';
 function Profile() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [modalDelete, setModalDelete] = useState(false);
     const [user, setUser] = useState(null);
     const [cars, setCars] = useState([]);
     const [brands, setBrands] = useState({});
@@ -17,10 +19,15 @@ function Profile() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cookies, setCookies] = useCookies();
-    const deleteAd = async (id) => {
-        await axios.delete(base_url + '/cars/' + id, { headers: { token: cookies.token}});
-        findCarsByUserId();
-    }
+
+    const openModalDelete = () => {
+        setModalDelete(true);
+    };
+
+    const closeModalDelete = () => {
+        setModalDelete(false);
+    };
+
     const [visibleOldPassword, setVisibleOldPassword] = useState(false);
     const [visibleNewPassword, setVisibleNewPassword] = useState(false);
     const findCarsByUserId = async () => {
@@ -32,6 +39,11 @@ function Profile() {
             setError('Failed to load user ads.');
         }
     };
+    const deleteAd = async (id) => {
+        await axios.delete(base_url + '/cars/' + id, { headers: { token: cookies.token } });
+        alert("Ad has been deleted successfully!")
+        findCarsByUserId();
+    }
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -135,14 +147,14 @@ function Profile() {
                             <input placeholder='New phone number' type='text' name='phone' />
                             <input placeholder='New e-mail' type='email' name='email' />
                             <div className='password-input'>
-                                <input style={{fontSize: '22px'}} placeholder='Old password' type={visibleOldPassword ? 'text' : 'password'} minLength={8} name='oldPassword' />
-                                <div className='eye-icon' onClick={toggleVisibleOldPassword} style={{fontSize: '24px'}}>
+                                <input style={{ fontSize: '22px' }} placeholder='Old password' type={visibleOldPassword ? 'text' : 'password'} minLength={8} name='oldPassword' />
+                                <div className='eye-icon' onClick={toggleVisibleOldPassword} style={{ fontSize: '24px' }}>
                                     {visibleOldPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                 </div>
                             </div>
                             <div className='password-input'>
-                                <input style={{fontSize: '22px'}} placeholder='New password' type={visibleNewPassword ? 'text' : 'password'} minLength={8} name='newPassword' />
-                                <div className='eye-icon' onClick={toggleVisibleNewPassword} style={{fontSize: '24px'}}>
+                                <input style={{ fontSize: '22px' }} placeholder='New password' type={visibleNewPassword ? 'text' : 'password'} minLength={8} name='newPassword' />
+                                <div className='eye-icon' onClick={toggleVisibleNewPassword} style={{ fontSize: '24px' }}>
                                     {visibleNewPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                 </div>
                             </div>
@@ -157,7 +169,7 @@ function Profile() {
                                 const modelName = models[item.model];
                                 return (
                                     <div className='my-ad-card' key={item.id}>
-                                        <img src={`${base_url2}/${item.image}`} alt='Img' />
+                                        <img src={base_url2 + '/' + item.image} alt='Img' />
                                         <div className='my-ad-card-div'>
                                             <div className='my-ad-card-info'>
                                                 <p className='ad-name'>{brandName + ' ' + modelName + ' ' + item.engine + ' ' + item.power + 'kW'}</p>
@@ -165,8 +177,17 @@ function Profile() {
                                                 <p className='ad-year'>{item.year}</p>
                                             </div>
                                             <div className='my-ad-buttons'>
-                                                <button onClick={() => {deleteAd(item.id)}} className='ad-delete-btn'>Delete</button>
-                                                <button className='ad-edit-btn' onClick={() => navigate(`/editAnAd/${item.id}`)}>Edit</button>
+                                                <button onClick={openModalDelete} className='ad-delete-btn'>Delete</button>
+                                                <Modal className='modalDeleteStyle fade-in-reg-log' isOpen={modalDelete} onRequestClose={closeModalDelete}>
+                                                    <div>
+                                                        <div>
+                                                            <h2>Are you sure you want to delete this ad?</h2>
+                                                            <button onClick={() => deleteAd(item.id)}>Delete</button>
+                                                            <button className='profile-' onClick={closeModalDelete}>Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </Modal>
+                                                <button className='ad-edit-btn' onClick={() => navigate('/editAnAd/' + item.id)}>Edit</button>
                                             </div>
                                         </div>
                                     </div>

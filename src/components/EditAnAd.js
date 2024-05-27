@@ -149,7 +149,7 @@ function EditAnAd() {
                                 <select value={car.brand || ''} className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     brandHandler(e);
-                                }} style={{ color: select }}>
+                                }} style={{ color: '#000' }}>
                                     <option hidden value={0}>Brand</option>
                                     {brands.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
@@ -158,7 +158,7 @@ function EditAnAd() {
                                 <select value={car.model || ''} className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     modelHandler(e);
-                                }} style={{ color: select }}>
+                                }} style={{ color: '#000' }}>
                                     <option hidden>Model</option>
                                     {models.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>
@@ -167,7 +167,7 @@ function EditAnAd() {
                                 <select value={car.bodyType || ''} className='bodytype-select' onChange={(e) => {
                                     handler(e);
                                     bodyTypeHandler(e);
-                                }} style={{ color: select }}>
+                                }} style={{ color: '#000' }}>
                                     <option hidden>Body type</option>
                                     <option>Touring</option>
                                     <option>Sedan</option>
@@ -181,31 +181,31 @@ function EditAnAd() {
                                 <div className='ad-input'>
                                     <label>Year</label>
                                     <div>
-                                        <input type='number' value={car.year || ''} min={0} onChange={yearHandler}></input>
+                                        <input type='number' value={car.year || ''} min={1925} onChange={yearHandler}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label>Price (€)</label>
                                     <div>
-                                        <input type='number' value={car.price || ''} min={0} onChange={priceHandler}></input>
+                                        <input type='number' value={car.price || ''} min={1} onChange={priceHandler}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='powerLabel'>Power (kW)</label>
                                     <div>
-                                        <input type='number' value={car.power || ''} min={0} onChange={powerHandler}></input>
+                                        <input type='number' value={car.power || ''} min={1} onChange={powerHandler}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='mileage-label'>Mileage (km)</label>
                                     <div>
-                                        <input type='number' value={car.mileage || ''} min={0} onChange={mileageHandler}></input>
+                                        <input type='number' value={car.mileage || ''} min={1} onChange={mileageHandler}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Engine</label>
                                     <div>
-                                        <input type='text' value={car.engine || ''} onChange={engineHandler}></input>
+                                        <input placeholder='ex. 1.9' type='text' value={car.engine || ''} onChange={engineHandler}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
@@ -217,13 +217,13 @@ function EditAnAd() {
                                 <div className='ad-input'>
                                     <label className='engine-label'>Reg. number</label>
                                     <div>
-                                        <input type='text' value={car.number || ''} onChange={numberHandler}></input>
+                                        <input placeholder='ex. 123 ASD' type='text' value={car.number || ''} onChange={numberHandler}></input>
                                     </div>
                                 </div>
                                 <select value={car.fuel || ''} onChange={(e) => {
                                     handler(e);
                                     fuelHandler(e);
-                                }} style={{ color: select }} className='fuel-select'>
+                                }} style={{ color: '#000' }} className='fuel-select'>
                                     <option hidden>Fuel</option>
                                     <option>Diesel</option>
                                     <option>Petrol</option>
@@ -245,7 +245,7 @@ function EditAnAd() {
                                 <select value={car.transmission || ''} onChange={(e) => {
                                     handler(e);
                                     transmissionHandler(e);
-                                }} style={{ color: select }} className='gear-select'>
+                                }} style={{ color: '#000' }} className='gear-select'>
                                     <option hidden>Transmission</option>
                                     <option>Automatic</option>
                                     <option>Manual</option>
@@ -254,7 +254,7 @@ function EditAnAd() {
                                 <select value={car.drivetrain || ''} onChange={(e) => {
                                     handler(e);
                                     drivetrainHandler(e);
-                                }} style={{ color: select }} className='transmission-select'>
+                                }} style={{ color: '#000' }} className='transmission-select'>
                                     <option hidden>Drivetrain</option>
                                     <option>Rear-wheel drive</option>
                                     <option>Front-wheel drive</option>
@@ -263,7 +263,7 @@ function EditAnAd() {
                                 <select value={car.city_id || ''} onChange={(e) => {
                                     handler(e);
                                     locationHandler(e);
-                                }} style={{ color: select }} className='location-select'>
+                                }} style={{ color: '#000' }} className='location-select'>
                                     <option hidden>Location</option>
                                     {cities.map((item, index) => (
                                         <option value={item.id} key={index}>{item.name}</option>

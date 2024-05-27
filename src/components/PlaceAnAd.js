@@ -53,7 +53,7 @@ function PlaceAnAd() {
                 token: cookies.token
             }
         });
-        alert("Ad has been placed");
+        alert("Ad has been placed successfully!");
         navigate('/');
     };
 
@@ -172,43 +172,43 @@ function PlaceAnAd() {
                                 <div className='ad-input'>
                                     <label>Year</label>
                                     <div>
-                                        <input type='number' min={1900} onChange={(e) => { yearHandler(e) }}></input>
+                                        <input type='number' min={1925} onChange={(e) => { yearHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label>Price (€)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { priceHandler(e) }}></input>
+                                        <input type='number' min={1} onChange={(e) => { priceHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='powerLabel'>Power (kW)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { powerHandler(e) }}></input>
+                                        <input type='number' min={1} onChange={(e) => { powerHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='mileage-label'>Mileage (km)</label>
                                     <div>
-                                        <input type='number' min={0} onChange={(e) => { mileageHandler(e) }}></input>
+                                        <input type='number' min={1} onChange={(e) => { mileageHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Engine</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { engineHandler(e) }}></input>
+                                        <input placeholder='ex. 1.9' type='text' min={1} onChange={(e) => { engineHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Color</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { colorHandler(e) }}></input>
+                                        <input type='text' min={1} onChange={(e) => { colorHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <div className='ad-input'>
                                     <label className='engine-label'>Reg. number</label>
                                     <div>
-                                        <input type='text' min={0} onChange={(e) => { numberHandler(e) }}></input>
+                                        <input placeholder='ex. 123 ASD' type='text' onChange={(e) => { numberHandler(e) }}></input>
                                     </div>
                                 </div>
                                 <select onChange={(e) => { handler(e); fuelHandler(e) }} style={{ color: select }} className='fuel-select'>
