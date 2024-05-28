@@ -85,11 +85,21 @@ function Header() {
         setVisibleRegisterConfirmPassword(!visibleRegisterConfirmPassword);
     };
 
+    const regToLogHandler = () => {
+            closeRegisterModal();
+            openLoginModal();
+    }
+
+    const logToRegHandler = () => {
+        closeLoginModal();
+        openRegisterModal();
+}
+
     const registerModal = (
         <div className='window-register'>
             <div className='loginRegisterWindows'>
                 <div className='loginDivWindow'>
-                    <h1 className='active'>Login</h1>
+                    <h1 className='active'><button className='regToLog-btn' onClick={regToLogHandler}>Login</button></h1>
                 </div>
                 <div className='registerDivWindow'>
                     <h1>
@@ -127,7 +137,7 @@ function Header() {
                     <h1><u>Login</u></h1>
                 </div>
                 <div className='registerDivWindow'>
-                    <h1>Register</h1>
+                    <h1><button className='logToReg-btn' onClick={logToRegHandler}>Register</button></h1>
                 </div>
             </div>
             <div onSubmit={formHandler} className='formLogin'>

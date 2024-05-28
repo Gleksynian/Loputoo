@@ -554,3 +554,15 @@ header ul+ul {
 .fade-in-reg-log {
     animation: fadeIn ease 0.5s;
 }
+
+.logToReg-btn {
+    border: none;
+    background-color: black;
+    color: #fff;
+}
+
+.regToLog-btn {
+    border: none;
+    background-color: black;
+    color: #fff;
+}

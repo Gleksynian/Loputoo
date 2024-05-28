@@ -293,7 +293,7 @@ function Main() {
                                         handler(e);
                                         setFilter({ ...filter, location: e.target.selectedOptions[0].value });
                                     }}
-                                    style={{ color: select }} В>
+                                    style={{ color: select }}>
                                     <option hidden>Location</option>
                                     <option>All</option>
                                     {cities.map((item, index) => (
