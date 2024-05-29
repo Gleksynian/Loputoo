@@ -77,7 +77,7 @@ function Main() {
         if (filter.fuel && filter.fuel !== 'All' && item.fuel !== filter.fuel) return false;
         if (filter.transmission && filter.transmission !== 'All' && item.transmission !== filter.transmission) return false;
         if (filter.drivetrain && filter.drivetrain !== 'All' && item.drivetrain !== filter.drivetrain) return false;
-        if (filter.location && filter.location !== 'All' && item.cityId !== parseInt(filter.location)) return false;
+        if (filter.location && filter.location !== 'All' && item.city_id !== parseInt(filter.location)) return false;
         if (filter.minPrice && item.price < parseInt(filter.minPrice)) return false;
         if (filter.maxPrice && item.price > parseInt(filter.maxPrice)) return false;
         if (filter.minYear && item.year < parseInt(filter.minYear)) return false;
@@ -328,7 +328,7 @@ function Main() {
                                             <img src={base_url2 + '/' + item.image} alt='car' />
                                             <div>
                                                 <div className='mainInfo'>
-                                                    <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power + 'kW'} { }</p>
+                                                    <p>{item.Brand.name + ' ' + item.Model.name + ' ' + item.engine + ' ' + item.power + 'kW'}</p>
                                                     <p>{item.price + ' €'}</p>
                                                     <p>{item.year}</p>
                                                 </div>
