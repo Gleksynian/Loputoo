@@ -92,6 +92,10 @@ function Profile() {
         fetchData();
     }, [id]);
 
+    const reloadPage = () => {
+        window.location.reload();
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const updatedUser = {};
@@ -118,7 +122,8 @@ function Profile() {
                 window.location.reload();
             } catch (error) {
                 console.error('Error updating user:', error);
-                setError('Failed to update user data.');
+                reloadPage();
+                alert(error.response.data.error);
             }
         }
     };
@@ -182,7 +187,7 @@ function Profile() {
                                                     <div>
                                                         <div>
                                                             <h2>Are you sure you want to delete this ad?</h2>
-                                                            <button onClick={() => deleteAd(item.id)}>Delete</button>
+                                                            <button onClick={() => { deleteAd(item.id); closeModalDelete(); }}>Delete</button>
                                                             <button className='profile-' onClick={closeModalDelete}>Cancel</button>
                                                         </div>
                                                     </div>

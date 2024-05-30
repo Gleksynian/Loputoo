@@ -38,14 +38,21 @@ function Header() {
 
     const formHandler = async (e) => {
         e.preventDefault();
+
+        if (!credentials.email || !credentials.password) {
+            alert("All fields are required!");
+            return;
+        }
+
         setLoading(true);
         try {
-            const response = await axios.post(base_url + '/users/login/', { user: credentials }, { withCredentials: true });
+            const response = await axios.post(base_url + '/users/login', { user: credentials });
             setCookies('token', response.data.accessToken, { path: '/' });
             setCookies('currentUserId', response.data.existUser, { path: '/' });
             closeLoginModal();
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error('Error during login:', error.response.data.error);
+            alert(error.response.data.error);
         } finally {
             setLoading(false);
         }
@@ -59,15 +66,27 @@ function Header() {
 
     const formRegHandler = async (e) => {
         e.preventDefault();
+
+        if (!registerCredentials.name || !registerCredentials.email || !registerCredentials.phone || !registerCredentials.password || !registerCredentials.confirmPassword) {
+            alert("All fields are required!");
+            return;
+        }
+
+        if (registerCredentials.password !== registerCredentials.confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
         setLoading(true);
         try {
-            const responseRegister = await axios.post(base_url + '/users/register/', { user: registerCredentials }, { withCredentials: true });
-            const responseLogin = await axios.post(base_url + '/users/login/', { user: registerCredentials }, { withCredentials: true });
-            setCookies('token', responseLogin.data.accessToken, { path: '/' });
-            setCookies('currentUserId', responseLogin.data.existUser, { path: '/' });
+            const response = await axios.post(base_url + '/users/register', { user: registerCredentials });
+            const loginResponse = await axios.post(base_url + '/users/login', { user: { email: registerCredentials.email, password: registerCredentials.password } });
+            setCookies('token', loginResponse.data.accessToken, { path: '/' });
+            setCookies('currentUserId', loginResponse.data.existUser, { path: '/' });
             closeRegisterModal();
         } catch (error) {
-            console.error('Error during registration:', error);
+            console.error('Error during registration:', error.response.data.error);
+            alert(error.response.data.error);
         } finally {
             setLoading(false);
         }
@@ -86,14 +105,14 @@ function Header() {
     };
 
     const regToLogHandler = () => {
-            closeRegisterModal();
-            openLoginModal();
+        closeRegisterModal();
+        openLoginModal();
     }
 
     const logToRegHandler = () => {
         closeLoginModal();
         openRegisterModal();
-}
+    }
 
     const registerModal = (
         <div className='window-register'>
@@ -114,7 +133,7 @@ function Header() {
                     <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, phone: e.target.value }) }} className='input-mail-register' type='tel' placeholder='Phone'></input>
                     <div className='password-input'>
                         <input onChange={(e) => { setRegisterCredentials({ ...registerCredentials, password: e.target.value }) }} className='input-password-register' type={visibleRegisterPassword ? 'text' : 'password'} minLength={8} placeholder='Password'></input>
-                        <div className='eye-icon' onClick={toggleVisibleRegisterPassword} style={{ color: '#fff', fontSize: '24px', marginTop: '5px'}}>
+                        <div className='eye-icon' onClick={toggleVisibleRegisterPassword} style={{ color: '#fff', fontSize: '24px', marginTop: '5px' }}>
                             {visibleRegisterPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </div>
                     </div>
